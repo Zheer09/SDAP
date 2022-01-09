@@ -18,6 +18,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
+import sun.rmi.server.Dispatcher;
 
 /**
  *
@@ -46,7 +49,7 @@ public class signUpController extends HttpServlet {
          try
          {
              con = DBconnection.createConnection();
-             String query = "insert into users(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
+             String query = "insert into userAccount(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
              preparedStatement.setString(1, user.getFullName());
              preparedStatement.setString(2, user.getUserEmail());
@@ -57,7 +60,10 @@ public class signUpController extends HttpServlet {
              int i= preparedStatement.executeUpdate();
              
              if (i!=0){
-            response.sendRedirect("clientView.jsp");
+            HttpSession session=request.getSession(); 
+            session.setAttribute("profile", user);
+            RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
+            dis.forward(request, response);
          }
         }
          catch(SQLException e)

@@ -15,7 +15,7 @@ public class DBconnection {
  public static Connection createConnection()
  {
      Connection con = null;
-     String url = "jdbc:mysql://mysql-65473-0.cloudclusters.net/sbw?"; //MySQL URL followed by the database name
+     String url = "jdbc:mysql://mysql-65473-0.cloudclusters.net:14308/sbw?"; //MySQL URL followed by the database name
      String username = "admin"; //MySQL username
      String password = "PhOvlCCw"; //MySQL password      
      try
