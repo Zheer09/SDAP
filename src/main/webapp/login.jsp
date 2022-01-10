@@ -4,6 +4,7 @@
     Author     : Zheer
 --%>
 
+<%@page import="Bean.Profile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -19,6 +20,26 @@
   </head>
    <body>
   
+       <%
+        Profile uid=(Profile)session.getAttribute("user");
+        
+        //redirect user to home page if already logged in
+        if(uid!=null){
+            //response.sendRedirect("home.jsp");
+        }
+ 
+        String status=request.getParameter("status");
+        
+        if(status!=null){
+         if(status.equals("false")){
+            out.print("Incorrect login details!");           
+         }
+         else{
+         out.print("Some error occurred!");
+         }
+        }
+        %>
+       
                                 <form class="position-absolute top-50 start-50 translate-middle">
                                     <h3 class="h4 font-weight-bold text-theme">Login</h3><br>
                                 <h6 class="h5 mb-0">Welcome back!</h6>
