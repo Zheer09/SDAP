@@ -14,6 +14,7 @@ import Bean.Profile;
 import Controller.DBconnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -49,6 +50,8 @@ public class signUpController extends HttpServlet {
          try
          {
              con = DBconnection.createConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("select userEmail from userAccount");
              String query = "insert into userAccount(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
              preparedStatement.setString(1, user.getFullName());
