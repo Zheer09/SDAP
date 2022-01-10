@@ -18,24 +18,28 @@
     <title>Hello, world!</title>
   </head>
    <body>
-  
-                                <form class="position-absolute top-50 start-50 translate-middle">
+      
+       <form class="position-absolute top-50 start-50 translate-middle" action="signUp" method="POST">
                                     <h3 class="h4 font-weight-bold text-theme">Sign Up</h3><br>
                                 
                                 <p>Enter the required information to sign up to the website</p>
+                                <div class="form-group">
+                                        <label for="InputName">Full Name</label>
+                                        <input type="text" class="form-control" name="fullname" id="inputName">
+                                    </div>
                                  <div class="form-group">
-                                        <label for="InputName">Name</label>
-                                        <input type="text" class="form-control" id="inputName">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" name="username" id="username">
                                     </div>
                                     <div class="form-group">
                                         <label for="InputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="inputEmail">
+                                        <input type="email" class="form-control" name="email" id="inputEmail">
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="InputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="inputPassword1">
+                                        <input type="password" class="form-control" name="password" id="inputPassword1">
                                     </div>
-                                    <button type="button" class="btn btn-primary">Sign Up</button>
+                                    <button type="submit" class="btn btn-primary">Sign Up</button>
                                      <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="login.jsp" class="text-primary ml-1">login</a></p>
                                 </form>
                          
