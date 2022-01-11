@@ -17,7 +17,7 @@ public class Profile implements Serializable {
     
     
     int userID;
-    String username, fullName, userRole, userEmail; 
+    String username, fullName, userRole, userEmail;
     
     public Profile(){
         
