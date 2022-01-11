@@ -51,8 +51,11 @@ public class signUpController extends HttpServlet {
          {
              con = DBconnection.createConnection();
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("select userEmail from userAccount");
-             String query = "insert into userAccount(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
+             
+             ResultSet rs = stmt.executeQuery("select userEmail from account");
+             if (rs.getString("userEmail") == email){             
+
+             String query = "insert into account(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
              preparedStatement.setString(1, user.getFullName());
              preparedStatement.setString(2, user.getUserEmail());
@@ -67,6 +70,7 @@ public class signUpController extends HttpServlet {
             session.setAttribute("profile", user);
             RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
             dis.forward(request, response);
+         }
          }
         }
          catch(SQLException e)
