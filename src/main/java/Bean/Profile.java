@@ -65,8 +65,5 @@ public class Profile implements Serializable {
         this.userEmail = userEmail;
     }
     
-
-    
-    
     
 }
