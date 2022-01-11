@@ -64,7 +64,7 @@ public class projectcontroller extends HttpServlet {
         formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date=formatter.parse(request.getParameter("date"));
         
-        String query = "insert into projects(projectTitle,projectType,projectDescription,projectBudget,projectDate,projectStatus) VALUE (?,?,?,?,?,?)";
+        String query = "insert into projects(projectTitle,projectType,projectDescription,projectBudget,projectDate,projectStatus,userEmail) VALUE (?,?,?,?,?,?,?)";
         PreparedStatement pres;
         pres = con.prepareStatement(query);
         pres.setString(1, title);
@@ -73,6 +73,7 @@ public class projectcontroller extends HttpServlet {
         pres.setString(4, budget);
         pres.setString(5, date1);
         pres.setString(6, "pending");
+        pres.setString(7, user.getUserEmail());
 
         int i =  pres.executeUpdate();
 
