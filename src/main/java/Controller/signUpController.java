@@ -36,6 +36,9 @@ public class signUpController extends HttpServlet {
          String email = request.getParameter("email");
          String userName = request.getParameter("username");
          String password = request.getParameter("password");
+
+         response.setContentType("text/html;charset=UTF-8");
+         PrintWriter out = response.getWriter();
          
          Profile user = new Profile();
         //Using Java Beans - An easiest way to play with group of related data
@@ -52,10 +55,10 @@ public class signUpController extends HttpServlet {
              con = DBconnection.createConnection();
              Statement stmt = con.createStatement();
              
-             ResultSet rs = stmt.executeQuery("select userEmail from account");
-             if (rs.getString("userEmail") == email){             
+             ResultSet rs = stmt.executeQuery("select userEmail from accounts where userEmail = '"+email+"'");
+             if (!rs.next()){             
 
-             String query = "insert into account(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
+             String query = "insert into accounts(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
              preparedStatement.setString(1, user.getFullName());
              preparedStatement.setString(2, user.getUserEmail());
@@ -70,8 +73,13 @@ public class signUpController extends HttpServlet {
             session.setAttribute("profile", user);
             RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
             dis.forward(request, response);
+                    }
          }
-         }
+         else{
+            RequestDispatcher dis = request.getRequestDispatcher("signUp.jsp");
+            dis.include(request, response);
+            out.print("<p style='text-align:center; color: red'>This email has been registered</p>");
+            }
         }
          catch(SQLException e)
          {
