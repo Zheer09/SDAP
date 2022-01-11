@@ -65,7 +65,7 @@ public class projectcontroller extends HttpServlet {
         PreparedStatement pres;
         pres = null;
         pres = con.prepareStatement(query);
-        pres.setDate(index, new java.sql.Date(date.getTime()));
+        //pres.setDate(index, new java.sql.Date(date.getTime()));
         
         } catch(SQLException e)
          {
