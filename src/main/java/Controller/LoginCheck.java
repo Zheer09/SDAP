@@ -6,6 +6,7 @@
 
 package Controller;
 
+import Bean.Profile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -46,7 +48,7 @@ public class LoginCheck extends HttpServlet {
 
            Statement stmt = con.createStatement();
          String sql;
-         sql = "SELECT * FROM sbw.userAccount where userEmail = '"+userN+"' and password = '"+pass+"'; ";
+         sql = "SELECT * FROM sbw.accounts where userEmail = '"+userN+"' and password = '"+pass+"'; ";
          ResultSet rs = stmt.executeQuery(sql);
             
             if (rs.next() == false) {
@@ -68,6 +70,11 @@ public class LoginCheck extends HttpServlet {
 
                      //statement(s)
                      // save user to session
+                     Profile user = new Profile();
+                     user.setFullName(rs.getString("fullName"));
+                     user.setUserEmail(rs.getString("userEmail"));
+                     HttpSession session=request.getSession(); 
+                     session.setAttribute("profile", user);
                      //response.sendRedirect("ClientView.jsp");
                      //RequestDispatcher req=request.getRequestDispatcher("ClientView.jsp");
                      System.out.print("success!!!!");
