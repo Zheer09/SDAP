@@ -4,7 +4,11 @@
     Author     : Lawand
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Controller.DBconnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Bean.Profile" %>
 <!doctype html>
 <html lang="en">
   <head> 
@@ -22,29 +26,12 @@
   </head>
 
   <body>
-<!--  <header>
-  <nav class="navbar navbar-light bg-light fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Software Development & Design</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SDA</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-             <a href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-</header>-->
+
+<% Profile pr =(Profile)session.getAttribute("profile");%>
+ 
+<% String name = pr.getFullName();
+   String email = pr.getUserEmail();
+%>
 
       <div class="position-absolute top-50 start-50 translate-middle">
  <div class="container">
@@ -55,13 +42,13 @@
                             <h2>Application form for adding project</h2>
                             <h5>Please enter the details of you services that you want to be created!</h5><br>
                         </div>
-                        <form>
+                        <form action="projectcontroller" method="post">
                             <!-- Form start -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="name">Name</label>
-                                        <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md">
+                                        <input id="name" name="name" type="text" value="<%=name%>" disabled class="form-control input-md">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -74,7 +61,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="email">Email</label>
-                                        <input id="email" name="email" type="text" placeholder="E-Mail" class="form-control input-md">
+                                        <input id="email" name="email" type="text" value="<%=email%>" disabled class="form-control input-md">
                                     </div>
                                 </div>
                                 <!-- Text input-->
@@ -94,7 +81,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="time">Type of project</label>
-                                        <select id="time" name="time" class="form-control">
+                                        <select id="time" name="type" class="form-control">
                                             <option value="Mobile">Mobile</option>
                                             <option value="Website">Website</option>
                                             <option value="Database">Database</option>
@@ -111,7 +98,7 @@
                                 <!-- Button -->
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Send Application</button>
+                                        <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Send Application</button>
                                     </div>
                                 </div>
                             </div>

@@ -4,14 +4,173 @@
     Author     : Zheer
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./CSS/ClientView.css">   
+ 
+    <!-- Bootstrap core CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<style>
+    body{
+        padding-left: 40px;
+        padding-right:  40px;
+    }
+    hr.new1 {
+  border-top: 4px solid blue;
+}
+</style>
+  </head>
+  <body>
+    
+<header>
+  <nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Software Development & Design</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Software Development & Design</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div  class="offcanvas-body">
+        <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li  class="nav-item">
+              <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
+              <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a><br>
+              <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Admin Control</h1>
+        
+        <p>
+         <div class="btn-group" role="group" aria-label="Basic outlined example">
+  
+             <button type="button" class="btn btn-outline-primary"><a href="adminProject.jsp">Projects</a></button> 
+  <button type="button" class="btn btn-outline-primary">Employee List</button>
+</div>
+        </p>
+      </div>
+    </div> 
+      <h1>Appointment Requests</h1>
+      <hr class="new1">
+    
+
+  </section>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      
+      <div class="card-body">
+        <h5 class="card-title">Appointment with Zheer</h5>
+        <p class="card-text">This is about creating a project.</p>
+      </div>
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" class="btn btn-success">Accept</button>
+  <button type="button" class="btn btn-danger">Decline</button>
+</div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" class="btn btn-success">Accept</button>
+  <button type="button" class="btn btn-danger">Decline</button>
+</div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+    
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" class="btn btn-success">Accept</button>
+  <button type="button" class="btn btn-danger">Decline</button>
+</div>
+    </div>
+  </div>
+</div>
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+     
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" class="btn btn-success">Accept</button>
+  <button type="button" class="btn btn-danger">Decline</button>
+</div>
+    </div>
+  </div>
+        <br>
+  <div class="col">
+    <div class="card h-100">
+     
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>   
+      </div>
+      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" class="btn btn-success">Accept</button>
+  <button type="button" class="btn btn-danger">Decline</button>
+</div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+   
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+      </div>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+  <button type="button" class="btn btn-success">Accept</button>
+  <button type="button" class="btn btn-danger">Decline</button>
+</div>
+      
+    </div>
+  </div>
+</div>
+    
+       
+      
+
+           
+
+      
+
+</main>
+
+
+
+<!--    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      
+  </body>
 </html>

@@ -7,30 +7,22 @@ and open the template in the editor.
     Created on : Jan 8, 2022, 12:22:16 PM
     Author     : Lawand
 */
-*{
-    background-color: red;
+body {
+  color: #000;
+  overflow-x: hidden;
 }
 
- .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      
-      .well-block {
-    background-color: #fff;
-    border: 1px solid #e9e6e8;
-    padding: 40px;
+#formPos {
+  font-size: 18px;
+  padding-top: 50px;
+  width: 750px;
+  position: relative;
+   
 }
 
-.well-title {
-    margin-bottom: 40px;
+#navTitle {
+    font-size: 20px;
 }
+
+

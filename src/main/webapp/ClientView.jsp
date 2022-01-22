@@ -4,7 +4,19 @@
     Author     : Zheer
 --%>
 
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Bean.Profile"%>
+<%@page import="Controller.DBconnection"%>
+<%@page import="java.sql.PreparedStatement" %>
+
+          <%
+             Connection con = DBconnection.createConnection();
+             Statement stm = con.createStatement();
+             String query = "select * from projects ";
+             ResultSet rs = stm.executeQuery(query); %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -28,19 +40,20 @@
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SDA</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Software Development & Design</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-             <a href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+      <div  class="offcanvas-body">
+        <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li  class="nav-item">
+              <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
+            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+             
           </li>
         </ul>
       </div>
     </div>
   </div>
-</nav>
 </header>
 
 <main>
@@ -62,58 +75,31 @@
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <%   
+            while(rs.next())
+            {
+          %>
         <div class="col">
           <div class="card shadow-sm">
             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
-            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Project 1</text></svg>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em"><%=rs.getString("projectTitle")%></text></svg>
 
             <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><%=rs.getString("projectDescription")%></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="viewProject.jsp">View</a></button>
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="newUpdates.jsp">Edit</a></button>
                 </div>
-                <small class="text-muted">90%</small>
+                <small class="text-muted"><%=rs.getString("projectStatus")%></small>
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
-            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Project 2</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="viewProject.jsp">View</a></button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="newUpdates.jsp">Edit</a></button>
-                </div>
-                <small class="text-muted">30%</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Project 3</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="viewProject.jsp">View</a></button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="newUpdates.jsp">Edit</a></button>
-                </div>
-                <small class="text-muted">20%</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
+<%  
+    }
+%>
+      
 
 </main>
 
