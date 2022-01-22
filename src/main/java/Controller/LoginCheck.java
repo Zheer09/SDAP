@@ -8,6 +8,7 @@ package Controller;
 
 import Bean.Profile;
 import java.io.IOException;
+import Controller.DBconnection;
 import java.io.PrintWriter;
 import java.sql.*;
 import javax.servlet.RequestDispatcher;
@@ -42,14 +43,11 @@ public class LoginCheck extends HttpServlet {
                 
                 try{
                     
-            Class.forName("com.mysql.cj.jdbc.Driver");  
-            Connection con=DriverManager.getConnection(  
-            "jdbc:mysql://mysql-65473-0.cloudclusters.net:14308/sbw?","admin","PhOvlCCw");  
-
+           Connection con=DBconnection.createConnection();
            Statement stmt = con.createStatement();
-         String sql;
-         sql = "SELECT * FROM sbw.accounts where userEmail = '"+userN+"' and password = '"+pass+"'; ";
-         ResultSet rs = stmt.executeQuery(sql);
+           String sql;
+           sql = "SELECT * FROM userAccount where userEmail = '"+userN+"' and password = '"+pass+"'; ";
+           ResultSet rs = stmt.executeQuery(sql);
             
             if (rs.next() == false) {
                 

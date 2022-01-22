@@ -55,10 +55,10 @@ public class signUpController extends HttpServlet {
              con = DBconnection.createConnection();
              Statement stmt = con.createStatement();
              
-             ResultSet rs = stmt.executeQuery("select userEmail from accounts where userEmail = '"+email+"'");
+             ResultSet rs = stmt.executeQuery("select userEmail from userAccount where userEmail = '"+email+"'");
              if (!rs.next()){             
 
-             String query = "insert into accounts(fullName,userEmail,userName,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
+             String query = "insert into userAccount(fullName,userEmail,username,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
              preparedStatement.setString(1, user.getFullName());
              preparedStatement.setString(2, user.getUserEmail());
