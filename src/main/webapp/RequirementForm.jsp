@@ -26,7 +26,6 @@
   </head>
 
   <body>
-
 <% Profile pr =(Profile)session.getAttribute("profile");%>
  
 <% String name = pr.getFullName();

@@ -4,6 +4,7 @@
     Author     : Zheer
 --%>
 
+<%@page import="Bean.Profile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -19,19 +20,31 @@
   </head>
    <body>
   
-                                <form class="position-absolute top-50 start-50 translate-middle">
+       <%
+        Profile uid=(Profile)session.getAttribute("user");
+        
+        //redirect user to home page if already logged in
+        if(uid!=null){
+            response.sendRedirect("home.jsp");
+        }
+ 
+        
+        %>
+  
+       
+        <form action="LoginCheck" method="post" class="position-absolute top-50 start-50 translate-middle">
                                     <h3 class="h4 font-weight-bold text-theme">Login</h3><br>
                                 <h6 class="h5 mb-0">Welcome back!</h6>
                                 <p>Enter your email address and password to login to the website</p>
                                     <div class="form-group">
                                         <label for="InputEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="inputEmail">
+                                        <input type="email" class="form-control" id="inputEmail" name="inputEmail">
                                     </div>
                                     <div class="form-group mb-5">
                                         <label for="InputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="inputPassword1">
+                                        <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                                     </div>
-                                    <button type="button" class="btn btn-primary">Login</button>
+                                    <button type="submit" class="btn btn-primary">Login</button>
                                      <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="signUp.jsp" class="text-primary ml-1">sign up</a></p>
                                 </form>
                          
