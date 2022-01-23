@@ -40,19 +40,20 @@
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">SDA</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Software Development & Design</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-             <a href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+      <div  class="offcanvas-body">
+        <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li  class="nav-item">
+              <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
+            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+             
           </li>
         </ul>
       </div>
     </div>
   </div>
-</nav>
 </header>
 
 <main>
