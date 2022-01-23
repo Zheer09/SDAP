@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -39,6 +40,13 @@
                                         <label for="InputPassword1">Password</label>
                                         <input type="password" class="form-control" name="password" id="inputPassword1">
                                     </div>
+                                
+                                <c:if test="${not empty exist}">
+                                      <div class="alert alert-dismissable alert-danger"> 
+                                        <strong>${exist}</strong>
+                                      </div>
+                                   </c:if>
+                                
                                     <button type="submit" class="btn btn-primary">Sign Up</button>
                                      <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="login.jsp" class="text-primary ml-1">login</a></p>
                                 </form>

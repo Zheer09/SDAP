@@ -12,11 +12,18 @@
 <%@page import="Controller.DBconnection"%>
 <%@page import="java.sql.PreparedStatement" %>
 
+<% Profile pr =(Profile)session.getAttribute("profile");%>
+ 
+<% String name = pr.getFullName();
+   String email = pr.getUserEmail();
+%>
+
           <%
              Connection con = DBconnection.createConnection();
              Statement stm = con.createStatement();
-             String query = "select * from projects ";
+             String query = "select * from projects where username='"+pr.getUsername()+"' ";
              ResultSet rs = stm.executeQuery(query); %>
+             
 <!doctype html>
 <html lang="en">
   <head>
@@ -48,6 +55,10 @@
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
             <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+            
+            <form action="logout" method="post">
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+                </form>
              
           </li>
         </ul>
@@ -79,23 +90,15 @@
             while(rs.next())
             {
           %>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
-            <text x="50%" y="50%" fill="#eceeef" dy=".3em"><%=rs.getString("projectTitle")%></text></svg>
-
-            <div class="card-body">
-              <p class="card-text"><%=rs.getString("projectDescription")%></p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="viewProject.jsp">View</a></button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="newUpdates.jsp">Edit</a></button>
-                </div>
-                <small class="text-muted"><%=rs.getString("projectStatus")%></small>
-              </div>
-            </div>
-          </div>
+   <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%=rs.getString("projectTitle")%></h5>
+          <p class="card-text"><%=rs.getString("projectDescription")%></p>
+          <button type="button" class="btn btn-primary">Details</button>
+          <button type="button" class="btn btn-danger">Edit</button>
         </div>
+      </div>
+                
 <%  
     }
 %>

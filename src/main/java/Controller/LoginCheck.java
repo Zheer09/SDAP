@@ -11,6 +11,7 @@ import java.io.IOException;
 import Controller.DBconnection;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,40 +52,38 @@ public class LoginCheck extends HttpServlet {
             
             if (rs.next() == false) {
                 
-                 
-       
-                out.print("<p style='color: red; text-align:center'>Invalid username or password. Please try again...</p>");
                 
-            //RequestDispatcher req=request.getRequestDispatcher("login.jsp");
+            request.setAttribute("invalid", "Invalid username or password. Please try again...");
             RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
-    
-            //System.out.print(rs);
-             
-             req.include(request, response);
+            req.forward(request, response);
              
              
                 } else {
                 
 
-                     //statement(s)
-                     // save user to session
                      Profile user = new Profile();
+                     user.setUsername(rs.getString("username"));
                      user.setFullName(rs.getString("fullName"));
                      user.setUserEmail(rs.getString("userEmail"));
+                     user.setUserRole(rs.getString("userRole"));
                      HttpSession session=request.getSession(); 
                      session.setAttribute("profile", user);
                      //response.sendRedirect("ClientView.jsp");
                      //RequestDispatcher req=request.getRequestDispatcher("ClientView.jsp");
                      System.out.print("success!!!!");
-                     RequestDispatcher requestDispatcher = request
-                    .getRequestDispatcher("/ClientView.jsp");
                      
-            requestDispatcher.forward(request, response);
-                        
+                     if(rs.getString("userRole").equals("client"))
+                     {
+                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/ClientView.jsp");
+                      requestDispatcher.forward(request, response);
+                     }
                      
-
-                    
-               
+                     else{
+                      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/AdminView.jsp");
+                      requestDispatcher.forward(request, response);
+                     }
+           
+  
            }
 
             }catch(Exception e){System.out.println(e);}  

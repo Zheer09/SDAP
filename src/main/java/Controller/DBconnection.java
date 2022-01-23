@@ -15,9 +15,9 @@ public class DBconnection {
  public static Connection createConnection()
  {
      Connection con = null;
-     String url = "jdbc:mysql://sql5.freesqldatabase.com:3306/sql5467284?"; //MySQL URL followed by the database name
-     String username = "sql5467284"; //MySQL username
-     String password = "TDPgjmkpY2"; //MySQL password      
+     String url = "jdbc:mysql://localhost:3306/SDAP?"; //MySQL URL followed by the database name
+     String username = "root"; //MySQL username
+     String password = ""; //MySQL password      
      try
      {
          try

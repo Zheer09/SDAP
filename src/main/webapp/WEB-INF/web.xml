@@ -12,6 +12,14 @@
         <servlet-name>projectcontroller</servlet-name>
         <servlet-class>Controller.projectcontroller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>bookingappointment</servlet-name>
+        <servlet-class>Controller.bookingappointment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>Controller.logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginCheck</servlet-name>
         <url-pattern>/LoginCheck</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>projectcontroller</servlet-name>
         <url-pattern>/projectcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>bookingappointment</servlet-name>
+        <url-pattern>/bookingappointment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

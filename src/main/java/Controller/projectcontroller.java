@@ -29,51 +29,77 @@ import javax.servlet.http.HttpSession;
  * @author bestz
  */
 public class projectcontroller extends HttpServlet {
+    
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException , ClassNotFoundException, SQLException {
+         
+        String delete = request.getParameter("remove");
+        String detail = request.getParameter("details");
+        
+        Connection con = DBconnection.createConnection();
+        PreparedStatement pres;
+        
+        String id=request.getParameter("id");
+        
+        if(delete.equals("Remove")){
+        try {
+        String query = "DELETE FROM projects WHERE projectID=?";
+        pres = con.prepareStatement(query);
+        pres.setString(1, id);
 
+        int i =  pres.executeUpdate();
+
+            if (i!=0){
+            RequestDispatcher dis = request.getRequestDispatcher("AdminView.jsp");
+            dis.forward(request, response);
+            }
+
+        } catch(SQLException e)
+         {
+            e.printStackTrace();
+         } 
+        }
+     }
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
       
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-  HttpSession session=request.getSession(); 
-     Profile user =(Profile)session.getAttribute("profile");
+            throws ServletException, IOException  {
+        
+        HttpSession session=request.getSession(); 
+        Profile user =(Profile)session.getAttribute("profile");
         String title = request.getParameter("Title");
         String budget = request.getParameter("Budget");
         String date1 = request.getParameter("date");
         String type = request.getParameter("type");
         String description = request.getParameter("discription");
+        
+
+        
+        
 
             //session.setAttribute("profile", user);
-       
-        try {
         Connection con = DBconnection.createConnection();
-        DateFormat formatter ;
-        formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date date=formatter.parse(request.getParameter("date"));
-        
-        String query = "insert into projects(projectTitle,projectType,projectDescription,projectBudget,projectDate,projectStatus,userEmail) VALUE (?,?,?,?,?,?,?)";
         PreparedStatement pres;
+        
+        if(title != null){
+        try {
+        String query = "insert into projects(projectTitle,projectType,projectDescription,projectBudget,projectDate,projectStatus,username) VALUE (?,?,?,?,?,?,?)";
         pres = con.prepareStatement(query);
         pres.setString(1, title);
         pres.setString(2, type);
         pres.setString(3, description);
         pres.setString(4, budget);
-        pres.setString(5, date1);
-        pres.setString(6, "pending");
-        pres.setString(7, user.getUserEmail());
+        pres.setString(5, date1);   
+        pres.setString(6, "Pending");
+        pres.setString(7, user.getUsername());
 
         int i =  pres.executeUpdate();
 
@@ -85,16 +111,13 @@ public class projectcontroller extends HttpServlet {
         } catch(SQLException e)
          {
             e.printStackTrace();
-         } catch (ParseException ex) { 
-            Logger.getLogger(projectcontroller.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+         } 
+        }
+          
+        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";

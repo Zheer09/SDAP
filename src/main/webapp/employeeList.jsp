@@ -1,28 +1,10 @@
 <%-- 
-    Document   : adminProject
-    Created on : Jan 22, 2022, 7:30:05 PM
+    Document   : employeeList
+    Created on : Jan 23, 2022, 11:12:11 PM
     Author     : Lawand
 --%>
 
-<%@page import="Controller.DBconnection"%>
-<%@page import="Bean.Profile"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-
-
-<% Profile pr =(Profile)session.getAttribute("profile");%>
- 
-<% String name = pr.getFullName();
-   String email = pr.getUserEmail();
-%>
-
-          <%
-             Connection con = DBconnection.createConnection();
-             Statement stm = con.createStatement();
-             String query = "select * from projects";
-             ResultSet rs = stm.executeQuery(query); %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,21 +14,21 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-      <link rel="stylesheet" href="./CSS/AdminProject.css">   
+     <style>
+
+.circle {
+     display:block;
+     align-content: center;
+       text-align: center;
+        background: lightblue;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+
+    </style>
     <title>Hello, world!</title>
   </head>
-  <style>
-      
-      .card{
-          align-content: center;
-          width: 1300px;
-           margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
-      }
-      
-      
-  </style>
   <header>
   <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
@@ -63,8 +45,8 @@
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
-            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a><br>
-              <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Logout</a>
+            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+             
           </li>
         </ul>
       </div>
@@ -72,35 +54,62 @@
   </div>
 </header>
   <body>
-      <br>  <br>  <br>
+      <br><br><br><br>
       
-        <%   
-            while(rs.next())
-            {
-          %>
-        
-<div class="card text-center">
-  
-  <div class="card-body">
-    <h5 class="card-title"><%=rs.getString("projectTitle")%></h5>
-    
-    <p class="card-text"><%=rs.getString("projectDescription")%></p>
+     <section>
+      <div class="container">
+          <h1>Employee List</h1><hr>
+   
+     <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Email</th>     
+      <th scope="col">Job Titles</th>
+      <th scope="col">Salary</th>
 
-    <a type="submit" value="Details"  name="details" class="btn btn-primary" href="projectcontroller?id=<%=rs.getString("projectID")%>">Details</a>
-    <a type="submit" value="Remove"  name="remove" class="btn btn-danger" href="projectcontroller?id=<%=rs.getString("projectID")%>">Remove</a>
-    
-  </div>
-  <div class="card-footer text-success">
-    <%=rs.getString("projectStatus")%>
-  </div>
-</div>
-        <br>  
-        
-          <%   
-              }
-          %>
+       <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Zheer</td>
+      <td>Ardalan</td>
+      <td>bestzheer@gmail.com</td>
+      <td>DevOps</td>
+      <td>2$</td>
+      <td><button type="button" class="btn btn-primary">Info</button> <button type="button" class="btn btn-danger">Delete</button></td>
+      
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Siros</td>
+      <td>Taib</td> 
+      <td>sirostaib@gmail.com</td>
+      <td>Backend Developer</td>
+      <td>2000$</td>
      
-        
+      <td><button type="button" class="btn btn-primary">Info</button> <button type="button" class="btn btn-danger">Delete</button></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Lawand</td>
+      <td>Hassan</td> 
+      <td>lawandhassan@gmail.com</td>
+      <td>Front-end Developer</td>
+      <td>9999$</td>
+     
+      <td><button type="button" class="btn btn-primary">Info</button> <button type="button" class="btn btn-danger">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+      </div>
+  
+</div>
+      </section>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

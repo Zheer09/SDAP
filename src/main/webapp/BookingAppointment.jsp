@@ -4,6 +4,7 @@
     Author     : Zheer
 --%>
 
+<%@page import="Bean.Profile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -17,7 +18,7 @@
 
     <title>Hello, world!</title>
   </head>
-      
+ 
 <header>
   <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
@@ -43,6 +44,13 @@
   </div>
 </header>
   <body>
+ 
+      <% Profile pr =(Profile)session.getAttribute("profile");%>  
+      
+      <% String name = pr.getFullName();
+         String email = pr.getUserEmail();
+        %>
+      
      <body>
      <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -50,34 +58,34 @@
                            
             <div id="formPos" class="container"> <br><br>
                 <h2>Book an Appointment</h2><br>
-                        <form>
+                <form action="bookingappointment" method="post">
                             <!-- Form start -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="name">Name</label>
-                                        <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md">
+                                        <input id="name" name="name" type="text" placeholder="Name" value="<%=name%>" disabled class="form-control input-md">
                                     </div>
                                 </div>
                                 <!-- Text input-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="email">Email</label>
-                                        <input id="email" name="email" type="text" placeholder="E-Mail" class="form-control input-md">
+                                        <input id="email" name="email" type="text" placeholder="E-Mail" value="<%=email%>" disabled class="form-control input-md">
                                     </div>
                                 </div>
                                 <!-- Text input-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="date">Preferred Date</label>
-                                        <input id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md">
+                                        <input id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md" required>
                                     </div>
                                 </div>
                                 <!-- Select Basic -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="time">Preferred Time</label>
-                                        <select id="time" name="time" class="form-control">
+                                        <label class="control-label" for="time">Available Time</label>
+                                        <select id="time" name="time" class="form-control"> 
                                             <option value="8:00 to 9:00">8:00 to 9:00</option>
                                             <option value="9:00 to 10:00">9:00 to 10:00</option>
                                             <option value="10:00 to 1:00">10:00 to 1:00</option>
@@ -88,7 +96,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="control-label" for="appointmentfor">Appointment For</label>
-                                        <input id="discription" name="discription" type="text" placeholder="Discription" class="form-control input-md">
+                                        <input id="discription" name="discription" type="text" placeholder="Discription" class="form-control input-md" required>
                                     </div>
                                 </div>
                                 <!-- Button -->

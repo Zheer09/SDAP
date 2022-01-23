@@ -6,6 +6,7 @@
 
 <%@page import="Bean.Profile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -44,6 +45,13 @@
                                         <label for="InputPassword1">Password</label>
                                         <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                                     </div>
+                                
+                                <c:if test="${not empty invalid}">
+                                      <div class="alert alert-dismissable alert-danger"> 
+                                        <strong>${invalid}</strong>
+                                      </div>
+                                   </c:if>
+                                
                                     <button type="submit" class="btn btn-primary">Login</button>
                                      <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="signUp.jsp" class="text-primary ml-1">sign up</a></p>
                                 </form>

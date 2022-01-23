@@ -3,7 +3,35 @@
     Created on : Jan 7, 2022, 3:46:11 PM
     Author     : Zheer
 --%>
+<%@page import="Bean.Profile"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="Controller.DBconnection"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.Connection"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+ <% Profile pr =(Profile)session.getAttribute("profile");
+ 
+    String name = pr.getFullName();
+   String email = pr.getUserEmail();
+
+        
+             Connection con = DBconnection.createConnection();
+             Statement stm = con.createStatement();
+             String query = "select * from userAccount ";
+             ResultSet rs = stm.executeQuery(query); 
+ 
+    if(!pr.getUserRole().equals("admin"))
+    {
+        
+        response.sendRedirect("ClientView.jsp");
+    }
+ 
+ %>
+ 
+ 
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,7 +53,12 @@
 </style>
   </head>
   <body>
-    
+
+   <% 
+   
+             String query1 = "select * from bookingappointment ";
+             ResultSet rs1 = stm.executeQuery(query1); 
+   %>          
 <header>
   <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
@@ -43,7 +76,10 @@
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
               <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a><br>
-              <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Logout</a>
+              
+              <form action="logout" method="post">
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+                </form>
           </li>
         </ul>
       </div>
@@ -72,99 +108,31 @@
     
 
   </section>
+              <%   
+            while(rs1.next())
+            {
+          %>
+    <form action="bookingappointment" method="post">
     <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col">
     <div class="card h-100">
       
       <div class="card-body">
-        <h5 class="card-title">Appointment with Zheer</h5>
-        <p class="card-text">This is about creating a project.</p>
+        <h5 class="card-title">Appointment with <%=name%></h5>
+        <p class="card-text"><%=rs1.getString("bookingDiscription")%></p>
+        <h6>requested for <time><%=rs1.getString("bookingTime")%></time> on <time><%=rs1.getString("bookingDate")%></time></h6> 
       </div>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" class="btn btn-success">Accept</button>
-  <button type="button" class="btn btn-danger">Decline</button>
-</div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" class="btn btn-success">Accept</button>
-  <button type="button" class="btn btn-danger">Decline</button>
-</div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
+        <button type="button" name="accept" class="btn btn-success">Accept</button>
+        <button type="button"  class="btn btn-danger">Decline</button>
+            </div>
+         </div>
+        </div>
+    </form>
     
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" class="btn btn-success">Accept</button>
-  <button type="button" class="btn btn-danger">Decline</button>
-</div>
-    </div>
-  </div>
-</div>
-    <br>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-     
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" class="btn btn-success">Accept</button>
-  <button type="button" class="btn btn-danger">Decline</button>
-</div>
-    </div>
-  </div>
-        <br>
-  <div class="col">
-    <div class="card h-100">
-     
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>   
-      </div>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" class="btn btn-success">Accept</button>
-  <button type="button" class="btn btn-danger">Decline</button>
-</div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-   
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-  <button type="button" class="btn btn-success">Accept</button>
-  <button type="button" class="btn btn-danger">Decline</button>
-</div>
-      
-    </div>
-  </div>
-</div>
-    
-       
-      
-
-           
-
-      
-
+    <%  
+    }
+%>
 </main>
 
 

@@ -1,100 +1,90 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Controller;
 
+import Bean.Profile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Bean.Profile;
 import Controller.DBconnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
-import sun.rmi.server.Dispatcher;
 
 /**
  *
- * @author bestz
+ * @author Zheer
  */
-public class signUpController extends HttpServlet {
+public class bookingappointment extends HttpServlet {
 
+ 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException , ClassNotFoundException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+          
+            HttpSession session=request.getSession(); 
+            Profile user =(Profile)session.getAttribute("profile");
+     
+            String date = request.getParameter("date");
+            String time = request.getParameter("time");
+            String discription = request.getParameter("discription");
+            
+            Connection con = null;
+            PreparedStatement preparedStatement = null;   
          
-         String fullName = request.getParameter("fullname");
-         String email = request.getParameter("email");
-         String userName = request.getParameter("username");
-         String password = request.getParameter("password");
-
-         response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
-         
-         Profile user = new Profile();
-        //Using Java Beans - An easiest way to play with group of related data
-         user.setFullName(fullName);
-         user.setUserEmail(email);
-         user.setUsername(userName);
-         user.setUserRole("client");
-
-
-         Connection con = null;
-         PreparedStatement preparedStatement = null;         
-         try
+            try
          {
              con = DBconnection.createConnection();
              Statement stmt = con.createStatement();
              
-             ResultSet rs = stmt.executeQuery("select userEmail from userAccount where userEmail = '"+email+"'");
-             if (!rs.next()){             
-
-             String query = "insert into userAccount(fullName,userEmail,username,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'
+             String query = "insert into bookingappointment(username,bookingDate,bookingTime,bookingDiscription,name,bookingEmaill) values (?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
-             preparedStatement.setString(1, user.getFullName());
-             preparedStatement.setString(2, user.getUserEmail());
-             preparedStatement.setString(3, user.getUsername());
-             preparedStatement.setString(4, password);
-             preparedStatement.setString(5, user.getUserRole());
+            
+             preparedStatement.setString(1, user.getUsername());
+             preparedStatement.setString(2, date);
+             preparedStatement.setString(3, time);
+             preparedStatement.setString(4, discription);
+             preparedStatement.setString(5, user.getFullName());
+             preparedStatement.setString(6, user.getUserEmail());
              
              int i= preparedStatement.executeUpdate();
              
              if (i!=0){
-            HttpSession session=request.getSession(); 
             session.setAttribute("profile", user);
             RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
             dis.forward(request, response);
                     }
-         }
+         
          else{
-                 
-            request.setAttribute("exist", "This email has been registered");          
             RequestDispatcher dis = request.getRequestDispatcher("signUp.jsp");
-            dis.forward(request, response);
+            dis.include(request, response);
+            out.print("<p style='text-align:center; color: red'>This email has been registered</p>");
             }
         }
          catch(SQLException e)
          {
             e.printStackTrace();
-         } 
+         }
+            
 
+        }
     }
 
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
          try {
         processRequest(request, response);
         } catch (ClassNotFoundException ex){
@@ -102,9 +92,9 @@ public class signUpController extends HttpServlet {
         } catch (SQLException ex) {
            // Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-    }  
+    }
 
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -118,11 +108,7 @@ public class signUpController extends HttpServlet {
  
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";
