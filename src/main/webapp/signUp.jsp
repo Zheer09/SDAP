@@ -21,7 +21,7 @@
    <body>
       
        <form class="position-absolute top-50 start-50 translate-middle" action="signUp" method="POST">
-                                    <h3 class="h4 font-weight-bold text-theme">Sign Up</h3><br>
+                                    <h3 class="h4 font-weight-bold text-theme">Sign Up</h3><hr>
                                 
                                 <p>Enter the required information to sign up to the website</p>
                                 <div class="form-group">
@@ -36,10 +36,25 @@
                                         <label for="InputEmail1">Email address</label>
                                         <input type="email" class="form-control" name="email" id="inputEmail">
                                     </div>
-                                    <div class="form-group mb-5">
+                                    <div class="form-group">
                                         <label for="InputPassword1">Password</label>
                                         <input type="password" class="form-control" name="password" id="inputPassword1">
                                     </div>
+                                
+                                <br>
+                                 <div class="form-group">
+                                    <div class="btn-group">
+                                      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        User-Type
+                                      </button>
+                                      <ul class="dropdown-menu" name="type">
+                                        <li><a class="dropdown-item" href="#">Client</a></li>
+                                        <li><a class="dropdown-item" href="#">Staff</a></li>
+                                      </ul>
+                                    </div>
+                                    </div>
+                                <br>
+                                
                                 
                                 <c:if test="${not empty exist}">
                                       <div class="alert alert-dismissable alert-danger"> 

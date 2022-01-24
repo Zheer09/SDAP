@@ -20,6 +20,10 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>Controller.logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>staffcontroller</servlet-name>
+        <servlet-class>Controller.staffcontroller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginCheck</servlet-name>
         <url-pattern>/LoginCheck</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>staffcontroller</servlet-name>
+        <url-pattern>/staffcontroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

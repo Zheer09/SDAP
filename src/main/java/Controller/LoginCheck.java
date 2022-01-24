@@ -47,7 +47,7 @@ public class LoginCheck extends HttpServlet {
            Connection con=DBconnection.createConnection();
            Statement stmt = con.createStatement();
            String sql;
-           sql = "SELECT * FROM userAccount where userEmail = '"+userN+"' and password = '"+pass+"'; ";
+           sql = "SELECT * FROM useraccount where userEmail = '"+userN+"' and password = '"+pass+"'; ";
            ResultSet rs = stmt.executeQuery(sql);
             
             if (rs.next() == false) {

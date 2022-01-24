@@ -37,9 +37,10 @@ public class signUpController extends HttpServlet {
          String email = request.getParameter("email");
          String userName = request.getParameter("username");
          String password = request.getParameter("password");
-
          response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
+         
+         String type = request.getParameter("type");
          
          Profile user = new Profile();
         //Using Java Beans - An easiest way to play with group of related data

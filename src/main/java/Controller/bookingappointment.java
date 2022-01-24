@@ -48,7 +48,7 @@ public class bookingappointment extends HttpServlet {
              con = DBconnection.createConnection();
              Statement stmt = con.createStatement();
              
-             String query = "insert into bookingappointment(username,bookingDate,bookingTime,bookingDiscription,name,bookingEmaill) values (?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
+             String query = "insert into bookingappointment(username,bookingDate,bookingTime,bookingDiscription,name,bookingEmaill,bookingStatus) values (?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             
              preparedStatement.setString(1, user.getUsername());
@@ -57,6 +57,7 @@ public class bookingappointment extends HttpServlet {
              preparedStatement.setString(4, discription);
              preparedStatement.setString(5, user.getFullName());
              preparedStatement.setString(6, user.getUserEmail());
+             preparedStatement.setString(7, "Pending");
              
              int i= preparedStatement.executeUpdate();
              

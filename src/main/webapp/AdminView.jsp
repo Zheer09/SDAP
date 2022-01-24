@@ -20,7 +20,7 @@
         
              Connection con = DBconnection.createConnection();
              Statement stm = con.createStatement();
-             String query = "select * from userAccount ";
+             String query = "select * from useraccount ";
              ResultSet rs = stm.executeQuery(query); 
  
     if(!pr.getUserRole().equals("admin"))
@@ -98,7 +98,7 @@
          <div class="btn-group" role="group" aria-label="Basic outlined example">
   
              <button type="button" class="btn btn-outline-primary"><a href="adminProject.jsp">Projects</a></button> 
-  <button type="button" class="btn btn-outline-primary">Employee List</button>
+             <button type="button" class="btn btn-outline-primary"><a href="employeeList.jsp">Employee List</a></button>
 </div>
         </p>
       </div>
@@ -123,8 +123,8 @@
         <h6>requested for <time><%=rs1.getString("bookingTime")%></time> on <time><%=rs1.getString("bookingDate")%></time></h6> 
       </div>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" name="accept" class="btn btn-success">Accept</button>
-        <button type="button"  class="btn btn-danger">Decline</button>
+        <button type="button" name="accept" value="accept" class="btn btn-success">Accept</button>
+        <button type="button" name="decline" value="decline" class="btn btn-danger">Decline</button>
             </div>
          </div>
         </div>
