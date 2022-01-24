@@ -10,6 +10,11 @@ package Bean;
  * @author Zheer
  */
 public class staff {
+    
+    
+    public staff(){
+    
+    }
 
     public String getFirst_Name() {
         return First_Name;
@@ -50,9 +55,33 @@ public class staff {
     public void setStaffSalary(int StaffSalary) {
         this.StaffSalary = StaffSalary;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String PhoneNumber) {
+        this.PhoneNumber = PhoneNumber;
+    }
     
     
-    String First_Name , Last_Name , StaffEmail ,StaffJobTitle;
+    String First_Name , Last_Name , StaffEmail ,StaffJobTitle, username, password , PhoneNumber;
     int StaffSalary ;
     
 }

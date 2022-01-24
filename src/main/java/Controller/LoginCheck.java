@@ -7,6 +7,7 @@
 package Controller;
 
 import Bean.Profile;
+import Bean.staff;
 import java.io.IOException;
 import Controller.DBconnection;
 import java.io.PrintWriter;
@@ -37,13 +38,13 @@ public class LoginCheck extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        // inputPassword, inputEmail
         String userN=request.getParameter("inputEmail");
         String pass=request.getParameter("inputPassword");
-        //PrintWriter out = response.getWriter();
-                
-                try{
-                    
+        String type = request.getParameter("type");
+        
+        
+        if(type.equals("Client")){
+                try{  
            Connection con=DBconnection.createConnection();
            Statement stmt = con.createStatement();
            String sql;
@@ -52,15 +53,13 @@ public class LoginCheck extends HttpServlet {
             
             if (rs.next() == false) {
                 
-                
             request.setAttribute("invalid", "Invalid username or password. Please try again...");
             RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
             req.forward(request, response);
              
              
-                } else {
-                
-
+                }
+            else {
                      Profile user = new Profile();
                      user.setUsername(rs.getString("username"));
                      user.setFullName(rs.getString("fullName"));
@@ -87,6 +86,44 @@ public class LoginCheck extends HttpServlet {
            }
 
             }catch(Exception e){System.out.println(e);}  
+                
+        }
+        else if(type.equals("Staff")){
+        
+             try{  
+           Connection con=DBconnection.createConnection();
+           Statement stmt = con.createStatement();
+           String sql;
+           sql = "SELECT * FROM staff where StaffEmail = '"+userN+"' and password = '"+pass+"'; ";
+           ResultSet rs = stmt.executeQuery(sql);
+            
+            if (rs.next() == false) {
+                
+            request.setAttribute("invalid", "Invalid username or password. Please try again...");
+            RequestDispatcher req = request.getRequestDispatcher("/login.jsp");
+            req.forward(request, response);
+             
+             
+                }
+            else {
+                     staff user = new staff();
+                     
+                     user.setUsername(rs.getString("StaffUsername"));
+                     user.setStaffEmail(rs.getString("StaffEmail"));
+                     HttpSession session=request.getSession(); 
+                     session.setAttribute("profile", user);
+                     
+                     
+                      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/StaffView.jsp");
+                      requestDispatcher.forward(request, response);
+                    
+           
+  
+           }
+
+            }catch(Exception e){System.out.println(e);}  
+        
+        }
         
     }
 

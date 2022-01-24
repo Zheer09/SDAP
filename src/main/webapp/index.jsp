@@ -4,7 +4,30 @@
     Author     : Zheer
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Bean.Profile"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+
+<%
+        Profile uid=(Profile)session.getAttribute("user");
+
+        //redirect user to home page if already logged in
+        if(uid!=null){
+
+            if(uid.getUserRole().equals("admin")){
+                response.sendRedirect("AdminView.jsp");
+            }else if(uid.getUserRole().equals("client")){
+                response.sendRedirect("ClientView.jsp");
+            }
+            else if(uid.getUserRole().equals("staff")){
+            
+                response.sendRedirect("ClientView.jsp");
+            }
+            //response.sendRedirect("home.jsp");
+        }
+ 
+
+        %>
+        
 <!doctype html>
 <html lang="en">
   <head>

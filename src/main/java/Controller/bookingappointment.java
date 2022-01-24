@@ -6,6 +6,7 @@
 package Controller;
 
 import Bean.Profile;
+import Bean.appointment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,6 +19,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 
@@ -29,54 +35,133 @@ public class bookingappointment extends HttpServlet {
 
  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException , ClassNotFoundException, SQLException {
+            throws ServletException, IOException , ClassNotFoundException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
           
             HttpSession session=request.getSession(); 
             Profile user =(Profile)session.getAttribute("profile");
-     
+            
+            
             String date = request.getParameter("date");
             String time = request.getParameter("time");
             String discription = request.getParameter("discription");
+            String subject = request.getParameter("subject");
+            String type = request.getParameter("type");
             
             Connection con = null;
             PreparedStatement preparedStatement = null;   
-         
-            try
-         {
+            
+            
+             appointment book= new appointment(); 
+             
+             book.setDate(date);
+             book.setDiscription(discription);
+             book.setSubject(subject);
+             book.setTime(time);
+             
+             
+//             Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(date);  
+//             Date date22 = new SimpleDateFormat("HH:mm").parse(time);
+             
+             
+             
+             
              con = DBconnection.createConnection();
              Statement stmt = con.createStatement();
              
-             String query = "insert into bookingappointment(username,bookingDate,bookingTime,bookingDiscription,name,bookingEmaill,bookingStatus) values (?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
+             PreparedStatement pres;
+              
+         if(subject != null){
+            try
+         {          
+             
+             ResultSet rs = stmt.executeQuery("select * from bookingappointment where bookingDate='"+book.getDate()+"' AND bookingTime='"+book.getTime()+"'");
+             
+             if(!rs.next()){
+             
+             String query = "insert into bookingappointment(username,bookingDate,bookingTime,bookingDiscription,name,bookingEmaill,bookingStatus,bookingSubject) values (?,?,?,?,?,?,?,?)"; //Insert user details into the table 'USERS'
              preparedStatement = con.prepareStatement(query); //Making use of prepared statements here to insert bunch of data
             
              preparedStatement.setString(1, user.getUsername());
-             preparedStatement.setString(2, date);
-             preparedStatement.setString(3, time);
-             preparedStatement.setString(4, discription);
+             preparedStatement.setString(2, book.getDate());
+             preparedStatement.setString(3, book.getTime());
+             preparedStatement.setString(4, book.getDiscription());
              preparedStatement.setString(5, user.getFullName());
              preparedStatement.setString(6, user.getUserEmail());
              preparedStatement.setString(7, "Pending");
+             preparedStatement.setString(8, book.getSubject());
              
              int i= preparedStatement.executeUpdate();
              
              if (i!=0){
             session.setAttribute("profile", user);
-            RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
+            request.setAttribute("valid", "The date has been booked");
+            RequestDispatcher dis = request.getRequestDispatcher("BookingAppointment.jsp");
             dis.forward(request, response);
                     }
-         
+             }
          else{
-            RequestDispatcher dis = request.getRequestDispatcher("signUp.jsp");
-            dis.include(request, response);
-            out.print("<p style='text-align:center; color: red'>This email has been registered</p>");
+            request.setAttribute("notvalid", "The date or time not available");
+            RequestDispatcher dis = request.getRequestDispatcher("BookingAppointment.jsp");
+            dis.forward(request, response);
+            
             }
-        }
+        } 
          catch(SQLException e)
          {
             e.printStackTrace();
          }
+         }
+         
+         
+         int id=Integer.parseInt(request.getParameter("id"));
+         
+          if(type.equals("Remove")){
+             
+             try {
+            String query = "DELETE FROM bookingappointment WHERE idbookingappointment=?";
+            pres = con.prepareStatement(query);
+            pres.setInt(1, id);
+
+            int i =  pres.executeUpdate();
+
+                if (i!=0){
+                RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
+                dis.forward(request, response);
+                id = 0;
+                }
+
+            } catch(SQLException e)
+             {
+                e.printStackTrace();
+             } 
+         
+         }
+          
+          else if(type.equals("Accept")){
+          
+               try {
+            String query = "UPDATE employees SET bookingStatus='Accept' WHERE idbookingappointment=?";
+            pres = con.prepareStatement(query);
+            pres.setInt(1, id);
+
+            int i =  pres.executeUpdate();
+
+                if (i!=0){
+                RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
+                dis.forward(request, response);
+                id = 0;
+                }
+
+            } catch(SQLException e)
+             {
+                e.printStackTrace();
+             } 
+          
+          }
+        
+            
             
 
         }
@@ -92,6 +177,8 @@ public class bookingappointment extends HttpServlet {
            // Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE), null, ex);
         } catch (SQLException ex) {
            // Logger.getLogger(StudentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(bookingappointment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -105,6 +192,8 @@ public class bookingappointment extends HttpServlet {
             System.out.println(ex.getMessage());
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(bookingappointment.class.getName()).log(Level.SEVERE, null, ex);
         }
  
     }

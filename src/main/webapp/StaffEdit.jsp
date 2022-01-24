@@ -1,28 +1,10 @@
 <%-- 
-    Document   : viewProject
+    Document   : StaffEdit
     Created on : Jan 7, 2022, 5:30:08 PM
     Author     : Zheer
 --%>
 
-<%@page import="Bean.update"%>
-<%@page import="Bean.Profile"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="Controller.DBconnection"%>
-<%@page import="Controller.DBconnection"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<% Profile pr =(Profile)session.getAttribute("profile");
-    update up = new update();
-    int id=Integer.parseInt(request.getParameter("id"));
-
-             Connection con = DBconnection.createConnection();
-             Statement stm = con.createStatement();
-             String query = "select * from projects where username='"+pr.getUsername()+"' and projectID='"+id+"' ";
-             ResultSet rs = stm.executeQuery(query); %>
-             
 <!doctype html>
 <html lang="en">
   <head>
@@ -62,25 +44,15 @@
   <body><br><br><br><br>
       <div class="container">
           <div class="row mb-3">
-              <%   
-            while(rs.next())
-            {
-          %>
         <div  class="col-sm-4 mb-2">
-            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span style="color: white" class="font-weight-semibold mr-2">Start Date: </span><%=rs.getString("projectDate")%></div>
+            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span style="color: white" class="font-weight-semibold mr-2">Start Date: </span>June 17, 2020</div>
         </div>
         <div class="col-sm-4 mb-2">
-            <div id="ProgressCard"  style=" border-radius: 35px;" class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Status: </span><%=rs.getString("projectStatus")%></div>
+            <div id="ProgressCard"  style=" border-radius: 35px;" class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Status: </span>In Progress</div>
         </div>
         <div class="col-sm-4 mb-2">
-            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Project Name: </span><%=rs.getString("projectTitle")%></div>
+            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Project name:  </span>Zhe3r Xweri</div>
         </div>
-         <%
-             
-             
-             up.setId(rs.getString("projectID"));
-             }
-          %>
     </div>
           
           
@@ -104,35 +76,35 @@
                 <!-- Timeline Area-->
                 <div class="apland-timeline-area">
                     <!-- Single Timeline Content-->
-                    <%
-             String query1 = "select * from projectUpdates where username='"+pr.getUsername()+"' and projectID='"+id+"' ";
-             ResultSet rs1 = stm.executeQuery(query1); 
-                    %>
-                    
-                    <%   
-            while(rs1.next())
-            {
-          %>
                     <div class="single-timeline-area">
                         <div class="timeline-date wow fadeInLeft" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInLeft;">    
                         </div>
-                        
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
                                     
                                     <div class="timeline-text">
-                                      <h6><%=rs1.getString("updateTitle")%></h6>
-                                        <p><%=rs1.getString("updateDescription")%></p><br><p><%=rs1.getString("updateDate")%></p><p><%=rs1.getString("updateStatus")%></p>
+                                      <h6>Fixed bug 2.0</h6><p>Pending</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p><br><p>17/3/2021</p><br>
+                                        <div style="font-size: 14px;" class="col-md-6">
+                                    <div class="form-group">
+                                        
+                                        <select style="font-size: 13px;" id="time" name="type" class="form-control">
+                                            <option value="Pending">Pending</option>
+                                            <option value="In Progress">In Progress</option>
+                                            <option value="Release">Release</option>
+                                            <option value="Finished">Finished</option>
+                                        </select>
+                                    </div>
+                                </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
-                  <%   
-                      }
-                    %>  
-                
+                    
+         
                     </div>
                 </div>
             </div>
@@ -140,28 +112,25 @@
     </div>
 </section> <br>
 </div>
-
-    <form action="updateProject?id=<%=up.getId()%>" method="post">
-
       <div class="container">
-          <h4>Send updates to be changed</h4><hr>
-      <div class="input-group mb-3">
-          <span class="input-group-text">Title</span>
-          <input name="title" id="title" type="text" class="form-control" placeholder="Title" aria-label="Username">
+   
+          <h4>Project Status</h4><hr>
+                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label" >Progress</label>
+                                        <select id="time" name="type" class="form-control">
+                                            <option value="Pending">Pending</option>
+                                            <option value="In Progress">In Progress</option>
+                                            <option value="Release">Release</option>
+                                            <option value="Finished">Finished</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
           
-        <span class="input-group-text">Username</span>
-        <input type="text" name="username" id="username" class="form-control" value="<%=pr.getUsername()%>" disabled placeholder="Username" aria-label="Username">
-</div>
-          
-<div class="input-group">
-    
-  
-    <textarea name="description" id="description" class="form-control" aria-label="With textarea"></textarea>
-        </div><br>
-          <button type="submit" class="btn btn-primary">Send</button>   
+     
+          <button type="button" class="btn btn-primary">Update</button>   
       </div><br><br>
-      
-      </form>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -42,18 +42,7 @@
                                     </div>
                                 
                                 <br>
-                                 <div class="form-group">
-                                    <div class="btn-group">
-                                      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        User-Type
-                                      </button>
-                                      <ul class="dropdown-menu" name="type">
-                                        <li><a class="dropdown-item" href="#">Client</a></li>
-                                        <li><a class="dropdown-item" href="#">Staff</a></li>
-                                      </ul>
-                                    </div>
-                                    </div>
-                                <br>
+
                                 
                                 
                                 <c:if test="${not empty exist}">
@@ -64,6 +53,7 @@
                                 
                                     <button type="submit" class="btn btn-primary">Sign Up</button>
                                      <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="login.jsp" class="text-primary ml-1">login</a></p>
+                                     <p class="text-muted text-center mt-3 mb-0">Staff member? <a href="signUpStaff.jsp" class="text-primary ml-1">sign up as staff</a></p>
                                 </form>
                          
 

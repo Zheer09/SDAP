@@ -4,7 +4,22 @@
     Author     : Lawand
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="Controller.DBconnection"%>
+<%@page import="Controller.DBconnection"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+  <%
+             Connection con = DBconnection.createConnection();
+             Statement stm = con.createStatement();
+             String query = "select * from staff ";
+             ResultSet rs = stm.executeQuery(query); %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -69,43 +84,48 @@
       <th scope="col">Email</th>     
       <th scope="col">Job Titles</th>
       <th scope="col">Salary</th>
-
+      <th scope="col">Username</th>
+      <th scope="col">Phone Number</th>
+      
        <th scope="col">#</th>
     </tr>
   </thead>
+  
   <tbody>
+    <%   
+            while(rs.next())
+            {
+          %>   
     <tr>
-      <th scope="row">1</th>
-      <td>Zheer</td>
-      <td>Ardalan</td>
-      <td>bestzheer@gmail.com</td>
-      <td>DevOps</td>
-      <td>2$</td>
-      <td><button type="button" class="btn btn-primary">Info</button> <button type="button" class="btn btn-danger">Delete</button></td>
+      <th scope="row"><%=rs.getString("staffid")%></th>
+      <td><%=rs.getString("First_Name")%></td>
+      <td><%=rs.getString("Last_Name")%></td>
+      <td><%=rs.getString("StaffEmail")%></td>
+      <td><%=rs.getString("StaffJobTitles")%></td>
+      <td><%=rs.getString("StaffSalary")%></td>
+      <td><%=rs.getString("StaffUsername")%></td>
+      <td><%=rs.getString("StaffPhone")%></td>
+      
+      <td>
+          <a href="staffcontroller?id=<%=rs.getString("staffid")%>&typebtn=Info" value="Info" type="submit" class="btn btn-primary">Info</a>
+          <a href="staffcontroller?id=<%=rs.getString("staffid")%>&typebtn=Delete" value="Delete" type="submit" class="btn btn-danger">Delete</a>
+      
+      </td>
       
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Siros</td>
-      <td>Taib</td> 
-      <td>sirostaib@gmail.com</td>
-      <td>Backend Developer</td>
-      <td>2000$</td>
-     
-      <td><button type="button" class="btn btn-primary">Info</button> <button type="button" class="btn btn-danger">Delete</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Lawand</td>
-      <td>Hassan</td> 
-      <td>lawandhassan@gmail.com</td>
-      <td>Front-end Developer</td>
-      <td>9999$</td>
-     
-      <td><button type="button" class="btn btn-primary">Info</button> <button type="button" class="btn btn-danger">Delete</button></td>
-    </tr>
+    
+    <%   
+        }
+          %> 
   </tbody>
 </table>
+  
+  <c:if test="${not empty deleted}">
+       <div class="alert alert-dismissable alert-success"> 
+            <strong>${deleted}</strong>
+             </div>
+           </c:if>
+  
       </div>
   
 </div>

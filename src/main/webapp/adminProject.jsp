@@ -86,8 +86,8 @@
     
     <p class="card-text"><%=rs.getString("projectDescription")%></p>
 
-    <a type="submit" value="Details"  name="details" class="btn btn-primary" href="projectcontroller?id=<%=rs.getString("projectID")%>">Details</a>
-    <a type="submit" value="Remove"  name="remove" class="btn btn-danger" href="projectcontroller?id=<%=rs.getString("projectID")%>">Remove</a>
+    <a type="submit" value="Details"  name="details" class="btn btn-primary" href="projectcontroller?id=<%=rs.getString("projectID")%>&type=Details">Details</a>
+    <a type="submit" value="Remove"  name="remove" class="btn btn-danger" href="projectcontroller?id=<%=rs.getString("projectID")%>&type=Remove">Remove</a>
     
   </div>
   <div class="card-footer text-success">

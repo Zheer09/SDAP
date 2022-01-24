@@ -42,6 +42,9 @@ public class signUpController extends HttpServlet {
          
          String type = request.getParameter("type");
          
+         
+         
+         
          Profile user = new Profile();
         //Using Java Beans - An easiest way to play with group of related data
          user.setFullName(fullName);
@@ -57,7 +60,7 @@ public class signUpController extends HttpServlet {
              con = DBconnection.createConnection();
              Statement stmt = con.createStatement();
              
-             ResultSet rs = stmt.executeQuery("select userEmail from userAccount where userEmail = '"+email+"'");
+             ResultSet rs = stmt.executeQuery("select userEmail from useraccount where userEmail = '"+email+"'");
              if (!rs.next()){             
 
              String query = "insert into userAccount(fullName,userEmail,username,password,userRole) values (?,?,?,?,?)"; //Insert user details into the table 'USERS'

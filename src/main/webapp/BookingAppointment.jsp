@@ -6,6 +6,7 @@
 
 <%@page import="Bean.Profile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -70,8 +71,8 @@
                                 <!-- Text input-->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label" for="email">Email</label>
-                                        <input id="email" name="email" type="text" placeholder="E-Mail" value="<%=email%>" disabled class="form-control input-md">
+                                        <label class="control-label" for="subject">Subject</label>
+                                        <input id="subject" name="subject" type="text" placeholder="Subject"  class="form-control input-md">
                                     </div>
                                 </div>
                                 <!-- Text input-->
@@ -92,14 +93,35 @@
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <!-- Select Basic -->
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="control-label" for="appointmentfor">Appointment For</label>
-                                        <input id="discription" name="discription" type="text" placeholder="Discription" class="form-control input-md" required>
+                                        <label class="control-label" for="email">Email</label>
+                                        <input id="email" name="email" type="text" placeholder="Email" value="<%=email%>" disabled class="form-control input-md">
                                     </div>
                                 </div>
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="discription">Appointment For</label>
+                                        <input id="discription" name="discription" type="text" placeholder="Discription" class="form-control input-md" required>
+                                    </div>
+                                </div> 
                                 <!-- Button -->
+                                
+                                <c:if test="${not empty notvalid}">
+                                      <div class="alert alert-dismissable alert-danger"> 
+                                        <strong>${notvalid}</strong>
+                                      </div>
+                                   </c:if>
+                                      
+                                      <c:if test="${not empty valid}">
+                                      <div class="alert alert-dismissable alert-success"> 
+                                        <strong>${valid}</strong>
+                                      </div>
+                                   </c:if>
+                                      
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <br> <button id="singlebutton" name="singlebutton" class="btn btn-primary">Make An Appointment</button>

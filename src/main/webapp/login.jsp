@@ -44,7 +44,19 @@
                                     <div class="form-group mb-5">
                                         <label for="InputPassword1">Password</label>
                                         <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+                                        
+                                        <br>
+                                        <div class="col-md-6">
+                                    <div class="form-group"> 
+                                        <select  id="type" name="type" class="form-control">
+                                            <option value="Client">Client</option>
+                                            <option value="Staff">Staff</option>
+                                        </select>
                                     </div>
+                                    </div>
+                                    </div>
+                                
+                                
                                 
                                 <c:if test="${not empty invalid}">
                                       <div class="alert alert-dismissable alert-danger"> 
@@ -54,6 +66,7 @@
                                 
                                     <button type="submit" class="btn btn-primary">Login</button>
                                      <p class="text-muted text-center mt-3 mb-0">Don't have an account? <a href="signUp.jsp" class="text-primary ml-1">sign up</a></p>
+                                     <p class="text-muted text-center mt-3 mb-0">Staff member? <a href="signUpStaff.jsp" class="text-primary ml-1">sign up as staff</a></p>
                                 </form>
                          
 

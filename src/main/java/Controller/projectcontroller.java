@@ -33,23 +33,31 @@ public class projectcontroller extends HttpServlet {
      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException , ClassNotFoundException, SQLException {
          
-        String delete = request.getParameter("remove");
-        String detail = request.getParameter("details");
+       
+     }
+   
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String type = request.getParameter("type");
         
         Connection con = DBconnection.createConnection();
         PreparedStatement pres;
         
-        String id=request.getParameter("id");
+        int id=Integer.parseInt(request.getParameter("id"));
         
-        if(delete.equals("Remove")){
+        if(type.equals("Remove")){
         try {
         String query = "DELETE FROM projects WHERE projectID=?";
         pres = con.prepareStatement(query);
-        pres.setString(1, id);
+        pres.setInt(1, id);
 
         int i =  pres.executeUpdate();
 
             if (i!=0){
+                
+            id = 0;
             RequestDispatcher dis = request.getRequestDispatcher("AdminView.jsp");
             dis.forward(request, response);
             }
@@ -59,12 +67,6 @@ public class projectcontroller extends HttpServlet {
             e.printStackTrace();
          } 
         }
-     }
-   
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
       
     }
 

@@ -24,6 +24,10 @@
         <servlet-name>staffcontroller</servlet-name>
         <servlet-class>Controller.staffcontroller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateProject</servlet-name>
+        <servlet-class>Controller.updateProject</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginCheck</servlet-name>
         <url-pattern>/LoginCheck</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>staffcontroller</servlet-name>
         <url-pattern>/staffcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateProject</servlet-name>
+        <url-pattern>/updateProject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -52,14 +52,7 @@
 }
 </style>
   </head>
-  <body>
-
-   <% 
-   
-             String query1 = "select * from bookingappointment ";
-             ResultSet rs1 = stm.executeQuery(query1); 
-   %>          
-<header>
+  <header>
   <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Software Development & Design</a>
@@ -86,6 +79,14 @@
     </div>
   </div>
 </header>
+  <body>
+
+   <% 
+   
+             String query1 = "select * from bookingappointment ";
+             ResultSet rs1 = stm.executeQuery(query1); 
+   %>          
+
 
 <main>
 
@@ -106,39 +107,31 @@
       <h1>Appointment Requests</h1>
       <hr class="new1">
     
-
+   
   </section>
-              <%   
+    
+<div class="container">
+    
+ <%   
             while(rs1.next())
             {
           %>
-    <form action="bookingappointment" method="post">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      
-      <div class="card-body">
-        <h5 class="card-title">Appointment with <%=name%></h5>
-        <p class="card-text"><%=rs1.getString("bookingDiscription")%></p>
-        <h6>requested for <time><%=rs1.getString("bookingTime")%></time> on <time><%=rs1.getString("bookingDate")%></time></h6> 
-      </div>
-    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" name="accept" value="accept" class="btn btn-success">Accept</button>
-        <button type="button" name="decline" value="decline" class="btn btn-danger">Decline</button>
-            </div>
-         </div>
+          <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title"><%=rs1.getString("bookingSubject")%></h5>
+          <p class="card-text"><%=rs1.getString("bookingDiscription")%></p>
+          <p class="card-text"><%=rs1.getString("bookingDate")%></p>
+           <p class="card-text">Time:<%=rs1.getString("bookingTime")%></p>
+          <a href="#" type="submit" class="btn btn-success">Accept</a>
+          <a href="#" type="submit" class="btn btn-danger">Deny</a>
         </div>
-    </form>
-    
-    <%  
+      </div>
+              <br>
+                   
+   <%  
     }
 %>
-</main>
 
-
-
-<!--    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-      
-  </body>
+          </div>
 </html>
+ 

@@ -24,7 +24,7 @@
              String query = "select * from projects where username='"+pr.getUsername()+"' ";
              ResultSet rs = stm.executeQuery(query); %>
 
-          
+             
 <!doctype html>
 <html lang="en">
   <head>
@@ -54,7 +54,11 @@
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
-            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+            <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a>
+            
+            <form action="logout" method="post">
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+                </form>
              
           </li>
         </ul>
@@ -84,7 +88,7 @@
   <div class="card-body">
     <h5 class="card-title"><%=rs.getString("projectTitle")%></h5>
     <p class="card-text"><%=rs.getString("projectDescription")%></p>
-    <button type="button" class="btn btn-primary">Details</button>
+    <a href="viewProject.jsp?id=<%=rs.getString("projectID")%>" type="submit" class="btn btn-primary">Details</a>
   </div>
   
 </div>
@@ -110,15 +114,15 @@
             while(rs1.next())
             {
           %>
-          <div class="card">
+<div class="card">
   <div class="card-header">
     <%=rs1.getString("name")%>
   </div>
   <div class="card-body">
     <h5 class="card-title"><%=rs1.getString("name")%></h5>
     <p class="card-text"><%=rs1.getString("bookingDiscription")%></p>
-    <button type="button" class="btn btn-primary">Details</button>
-    <button type="button" class="btn btn-danger">Cancel</button>
+    <a type="button" class="btn btn-primary">Details</a>
+    <a href="bookingappointment?id=<%=rs1.getString("idbookingappointment")%>&type=Remove" type="button" class="btn btn-danger">Cancel</a>
   </div>
 </div>
           

@@ -10,8 +10,22 @@ package Bean;
  * @author Zheer
  */
 public class appointment {
+
+    String date , time , discription , subject;
     
-    String date , time , discription;
+    
+    public appointment(){
+    
+    }
+    
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+    
 
     public String getDate() {
         return date;
