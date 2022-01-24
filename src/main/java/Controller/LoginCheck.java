@@ -111,7 +111,7 @@ public class LoginCheck extends HttpServlet {
                      user.setUsername(rs.getString("StaffUsername"));
                      user.setStaffEmail(rs.getString("StaffEmail"));
                      HttpSession session=request.getSession(); 
-                     session.setAttribute("profile", user);
+                     session.setAttribute("staff", user);
                      
                      
                       RequestDispatcher requestDispatcher = request.getRequestDispatcher("/StaffView.jsp");

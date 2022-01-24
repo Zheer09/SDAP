@@ -127,7 +127,7 @@ public class bookingappointment extends HttpServlet {
             int i =  pres.executeUpdate();
 
                 if (i!=0){
-                RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
+                RequestDispatcher dis = request.getRequestDispatcher("AdminView.jsp");
                 dis.forward(request, response);
                 id = 0;
                 }
@@ -142,14 +142,14 @@ public class bookingappointment extends HttpServlet {
           else if(type.equals("Accept")){
           
                try {
-            String query = "UPDATE employees SET bookingStatus='Accept' WHERE idbookingappointment=?";
+            String query = "UPDATE bookingappointment SET bookingStatus='Accepted' WHERE idbookingappointment=?";
             pres = con.prepareStatement(query);
             pres.setInt(1, id);
 
             int i =  pres.executeUpdate();
 
                 if (i!=0){
-                RequestDispatcher dis = request.getRequestDispatcher("ClientView.jsp");
+                RequestDispatcher dis = request.getRequestDispatcher("AdminView.jsp");
                 dis.forward(request, response);
                 id = 0;
                 }

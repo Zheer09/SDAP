@@ -28,6 +28,10 @@
         <servlet-name>updateProject</servlet-name>
         <servlet-class>Controller.updateProject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateStatus</servlet-name>
+        <servlet-class>Controller.updateStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginCheck</servlet-name>
         <url-pattern>/LoginCheck</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>updateProject</servlet-name>
         <url-pattern>/updateProject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateStatus</servlet-name>
+        <url-pattern>/updateStatus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

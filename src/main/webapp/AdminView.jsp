@@ -122,8 +122,8 @@
           <p class="card-text"><%=rs1.getString("bookingDiscription")%></p>
           <p class="card-text"><%=rs1.getString("bookingDate")%></p>
            <p class="card-text">Time:<%=rs1.getString("bookingTime")%></p>
-          <a href="#" type="submit" class="btn btn-success">Accept</a>
-          <a href="#" type="submit" class="btn btn-danger">Deny</a>
+          <a href="bookingappointment?id=<%=rs1.getString("idbookingappointment")%>&type=Accept" type="submit" class="btn btn-success">Accept</a>
+          <a href="bookingappointment?id=<%=rs1.getString("idbookingappointment")%>&type=Remove" type="submit" class="btn btn-danger">Deny</a>
         </div>
       </div>
               <br>

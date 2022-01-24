@@ -3,8 +3,24 @@
     Created on : Jan 7, 2022, 5:30:08 PM
     Author     : Zheer
 --%>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@page import="Bean.Project"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="Bean.Profile"%>
+<%@page import="Controller.DBconnection"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Bean.update"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<% //Profile pr =(Profile)session.getAttribute("profile");
+    Project pro = new Project();
+    int id=Integer.parseInt(request.getParameter("id"));
+
+             Connection con = DBconnection.createConnection();
+             Statement stm = con.createStatement();
+             String query = "select * from projects where projectID='"+id+"' ";
+             ResultSet rs = stm.executeQuery(query); %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -44,15 +60,27 @@
   <body><br><br><br><br>
       <div class="container">
           <div class="row mb-3">
+              
+              <%   
+            while(rs.next())
+            {
+          %>
+          
         <div  class="col-sm-4 mb-2">
-            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span style="color: white" class="font-weight-semibold mr-2">Start Date: </span>June 17, 2020</div>
+            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span style="color: white" class="font-weight-semibold mr-2">Start Date: </span><%=rs.getString("projectDate")%></div>
         </div>
         <div class="col-sm-4 mb-2">
-            <div id="ProgressCard"  style=" border-radius: 35px;" class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Status: </span>In Progress</div>
+            <div id="ProgressCard"  style=" border-radius: 35px;" class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Status: </span><%=rs.getString("projectStatus")%></div>
         </div>
         <div class="col-sm-4 mb-2">
-            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Project name:  </span>Zhe3r Xweri</div>
+            <div id="ProgressCard" style=" border-radius: 35px; " class="bg-primary p-4 text-white text-center"><span class="font-weight-semibold mr-2">Project name:  </span><%=rs.getString("projectTitle")%></div>
         </div>
+          
+          <% 
+              pro.setProjectID(rs.getInt("projectID"));  
+             
+              }
+          %>
     </div>
           
           
@@ -76,6 +104,14 @@
                 <!-- Timeline Area-->
                 <div class="apland-timeline-area">
                     <!-- Single Timeline Content-->
+                    <%
+                       String query1 = "select * from projectUpdates where projectID='"+id+"' ";
+                       ResultSet rs1 = stm.executeQuery(query1); 
+                    %>
+                                <%   
+                        while(rs1.next())
+                        {
+                      %>
                     <div class="single-timeline-area">
                         <div class="timeline-date wow fadeInLeft" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInLeft;">    
                         </div>
@@ -84,26 +120,34 @@
                                 <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
                                     
                                     <div class="timeline-text">
-                                      <h6>Fixed bug 2.0</h6><p>Pending</p>
-                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p><br><p>17/3/2021</p><br>
-                                        <div style="font-size: 14px;" class="col-md-6">
+                                      <h6><%=rs1.getString("updateTitle")%></h6><p>Pending</p>
+                                      <p><%=rs1.getString("updateDescription")%></p><br><p><%=rs1.getString("updateStatus")%></p><p><%=rs1.getString("updateDate")%></p><br>
+                                        <div style="font-size: 14px;" class="col-md-11">
+                                    <form action="updateStatus?id1=<%=rs1.getString("idprojectUpdates")%>&id=<%=pro.getProjectID()%>" method="post">
                                     <div class="form-group">
-                                        
-                                        <select style="font-size: 13px;" id="time" name="type" class="form-control">
-                                            <option value="Pending">Pending</option>
+                                        <select style="font-size: 13px;" id="updateStatus" name="updateStatus" class="form-control">
+                                            <option><%=rs1.getString("updateStatus")%></option>
                                             <option value="In Progress">In Progress</option>
                                             <option value="Release">Release</option>
                                             <option value="Finished">Finished</option>
                                         </select>
                                     </div>
+                                   
                                 </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Update</button>  
                                     </div>
+                                            </form>
                                 </div>
                             </div>
                             
                         </div>
                     </div>
                     
+                    <% 
+                        
+                        }
+                    %>
          
                     </div>
                 </div>
@@ -116,9 +160,10 @@
    
           <h4>Project Status</h4><hr>
                 <div class="col-md-6">
+                    <form action="updateStatus?id=<%= pro.getProjectID()%>&id1=0" method="post">
                                     <div class="form-group">
                                         <label class="control-label" >Progress</label>
-                                        <select id="time" name="type" class="form-control">
+                                        <select id="projectStatus" name="projectStatus" class="form-control">
                                             <option value="Pending">Pending</option>
                                             <option value="In Progress">In Progress</option>
                                             <option value="Release">Release</option>
@@ -127,9 +172,22 @@
                                     </div>
                                 </div>
                                 <br>
-          
+                                
+                                   <c:if test="${not empty Updated}">
+                                      <div class="alert alert-dismissable alert-success"> 
+                                        <strong>${Updated}</strong>
+                                      </div>
+                                   </c:if>
+                                
+                                 <c:if test="${not empty ProUpdated}">
+                                      <div class="alert alert-dismissable alert-success"> 
+                                        <strong>${ProUpdated}</strong>
+                                      </div>
+                                   </c:if>
      
-          <button type="button" class="btn btn-primary">Update</button>   
+          <button type="submit" class="btn btn-primary">Update</button>   
+          
+  </form>
       </div><br><br>
     <!-- Optional JavaScript; choose one of the two! -->
 

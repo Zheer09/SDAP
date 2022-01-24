@@ -116,7 +116,7 @@
           %>
 <div class="card">
   <div class="card-header">
-    <%=rs1.getString("name")%>
+    <%=rs1.getString("bookingStatus")%>
   </div>
   <div class="card-body">
     <h5 class="card-title"><%=rs1.getString("name")%></h5>

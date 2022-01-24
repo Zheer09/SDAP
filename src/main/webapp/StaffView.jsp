@@ -5,8 +5,26 @@
 --%>
 
 
-   
+<%@page import="Bean.staff"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>   
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="Controller.DBconnection"%>
+<%@page import="Controller.DBconnection"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Bean.Profile"%>
 
+
+<% staff pr =(staff)session.getAttribute("staff");%>
+ 
+<% String name = pr.getUsername();
+%>
+
+          <%
+             Connection con = DBconnection.createConnection();
+             Statement stm = con.createStatement();
+             String query = "select * from projects ";
+             ResultSet rs = stm.executeQuery(query); %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -49,20 +67,28 @@
       
      
       <div class="container">
-          <h2>Zheer's Projects</h2><hr>
+          <h2><%=name%>'s Projects</h2><hr>
+          
+     <%   
+            while(rs.next())
+            {
+          %>      
    <div class="card text-center">
   <div class="card-header">
-    Featured
+    <%=rs.getString("projectStatus")%>
   </div>
   <div class="card-body">
-    <h5 class="card-title">Project #1</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Details</a>
+    <h5 class="card-title"> <%=rs.getString("projectTitle")%></h5>
+    <p class="card-text"><%=rs.getString("projectDescription")%></p>
+    <a href="StaffEdit.jsp?id=<%=rs.getString("projectID")%>" class="btn btn-primary">Details</a>
   </div>
   <div class="card-footer text-muted">
-   last modify was on 2 days ago
   </div>
 </div>
+          
+  <%   
+      }
+          %>          
 </div> 
 
 
