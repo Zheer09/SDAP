@@ -19,10 +19,6 @@
             if(uid.getUserRole().equals("client")){
                 response.sendRedirect("ClientView.jsp");
             }
-            else if(uid.getUserRole().equals("staff")){
-            
-                response.sendRedirect("StaffView.jsp");
-            }
             
         }
  
@@ -40,11 +36,7 @@
              String query = "select * from useraccount ";
              ResultSet rs = stm.executeQuery(query); 
  
-    if(!pr.getUserRole().equals("admin"))
-    {
-        
-        response.sendRedirect("ClientView.jsp");
-    }
+   
  
  %>
  
