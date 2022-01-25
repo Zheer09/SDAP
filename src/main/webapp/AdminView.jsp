@@ -12,7 +12,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-        Profile uid=(Profile)session.getAttribute("user");
+        Profile uid=(Profile)session.getAttribute("profile");
 
         //redirect user to home page if already logged in
         if(uid!=null){
@@ -86,10 +86,10 @@
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
-              <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a><br>
+              <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a><br>
               
               <form action="logout" method="post">
-              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" >Logout</input>
                 </form>
           </li>
         </ul>

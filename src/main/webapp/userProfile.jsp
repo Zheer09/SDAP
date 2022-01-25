@@ -66,7 +66,7 @@ staff st = (staff)session.getAttribute("staff");
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="index.jsp" class="btn btn-primary my-2">Home</a> <br>
-            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+           <!-- <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a> -->
              
           </li>
         </ul>
@@ -87,7 +87,12 @@ staff st = (staff)session.getAttribute("staff");
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                     <div class="mt-3">
-                        <h4><%= rs.getString("fullName")  %></h4>
+                        <h4><% String fn = "";
+                            if(!pr.getUserRole().equals("staff")){
+                            fn = rs.getString("fullName"); }
+                        else {
+                            fn = rs.getString("First_Name") + " " + rs.getString("Last_Name");
+                        } %> <%= fn %></h4>
                       <p class="text-secondary mb-1"><%= rs.getString("userRole")  %></p>
                       <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                     </div>
@@ -102,7 +107,7 @@ staff st = (staff)session.getAttribute("staff");
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <%= rs.getString("fullName")  %>
+                      <%= fn  %>
                     </div>
                   </div>
                   <hr>
@@ -111,7 +116,13 @@ staff st = (staff)session.getAttribute("staff");
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <%= rs.getString("userEmail")  %>
+                        <% String em = "";
+                            if(!pr.getUserRole().equals("staff")){
+                            em = rs.getString("userEmail"); }
+                        else {
+                            em = rs.getString("StaffEmail");
+                        } %> <%= em %>
+                     
                     </div>
                   </div>
                   <hr>
@@ -144,7 +155,7 @@ staff st = (staff)session.getAttribute("staff");
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-primary">Edit</a>
+                     <!-- <a class="btn btn-primary">Edit</a> --> 
                     </div>
                   </div>
                 </div>

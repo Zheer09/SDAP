@@ -60,7 +60,7 @@
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
-            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+            <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a>
              
           </li>
         </ul>

@@ -14,7 +14,7 @@
 
 <% Profile pr =(Profile)session.getAttribute("profile");%>
 <%
-        Profile uid=(Profile)session.getAttribute("user");
+        Profile uid=(Profile)session.getAttribute("profile");
 
         //redirect user to home page if already logged in
         if(uid!=null){
