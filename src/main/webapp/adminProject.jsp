@@ -64,6 +64,11 @@
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
             <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a><br>
+          
+            
+            <form action="logout" method="post">
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+                </form>
               <!-- <a style="width: 150px" href="index.jsp" class="btn btn-primary my-2">Logout</a> -->
               <!-- 
               <form action="logout" method="post">

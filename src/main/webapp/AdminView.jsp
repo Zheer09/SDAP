@@ -7,9 +7,8 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="Controller.DBconnection"%>
 <%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="java.sql.Connection"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
         Profile uid=(Profile)session.getAttribute("profile");
@@ -70,7 +69,7 @@
 }
 </style>
   </head>
-  <header>
+ <header>
   <nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Software Development & Design</a>
@@ -86,11 +85,12 @@
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
-              <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a><br>
-              
-              <form action="logout" method="post">
-              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" >Logout</input>
+            <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a>
+            
+            <form action="logout" method="post">
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
                 </form>
+             
           </li>
         </ul>
       </div>
@@ -151,5 +151,9 @@
 %>
 
           </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     
+  </body>
 </html>
  

@@ -49,7 +49,10 @@
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
-            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+            <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a>
+            <form action="logout" method="post">
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+                </form>
              
           </li>
         </ul>
@@ -120,7 +123,7 @@
                                 <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
                                     
                                     <div class="timeline-text">
-                                      <h6><%=rs1.getString("updateTitle")%></h6><p>Pending</p>
+                                      <h6><%=rs1.getString("updateTitle")%></h6>
                                       <p><%=rs1.getString("updateDescription")%></p><br><p><%=rs1.getString("updateStatus")%></p><p><%=rs1.getString("updateDate")%></p><br>
                                         <div style="font-size: 14px;" class="col-md-11">
                                     <form action="updateStatus?id1=<%=rs1.getString("idprojectUpdates")%>&id=<%=pro.getProjectID()%>" method="post">

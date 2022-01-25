@@ -61,6 +61,11 @@
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
             <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a>
+           
+            
+            <form action="logout" method="post">
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+                </form>
              
           </li>
         </ul>
@@ -107,8 +112,7 @@
       <td><%=rs.getString("StaffPhone")%></td>
       
       <td>
-          <a href="staffcontroller?id=<%=rs.getString("staffid")%>&typebtn=Info" value="Info" type="submit" class="btn btn-primary">Info</a>
-          <a href="staffcontroller?id=<%=rs.getString("staffid")%>&typebtn=Delete" value="Delete" type="submit" class="btn btn-danger">Delete</a>
+           <a href="staffcontroller?id=<%=rs.getString("staffid")%>&typebtn=Delete" value="Delete" type="submit" class="btn btn-danger">Delete</a>
       
       </td>
       
@@ -159,8 +163,7 @@
       <td><%=rs1.getString("fullName")%></td>
       <td><%=rs1.getString("userEmail")%></td>
       <td>
-          <a href="staffcontroller?username=<%=rs1.getString("username")%>&typebtnClient=Info" value="Info" type="submit" class="btn btn-primary">Info</a>
-          <a href="staffcontroller?username=<%=rs1.getString("username")%>&typebtnClient=Delete" value="Delete" type="submit" class="btn btn-danger">Delete</a>
+           <a href="staffcontroller?username=<%=rs1.getString("username")%>&typebtnClient=Delete" value="Delete" type="submit" class="btn btn-danger">Delete</a>
       
       </td>
       

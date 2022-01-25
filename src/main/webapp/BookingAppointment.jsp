@@ -36,7 +36,10 @@
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
               <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
-            <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
+             <form action="logout" method="post">
+                 <a style="width: 150px" href="userProfile.jsp" class="btn btn-primary my-2">Profile</a>
+              <input style="width: 150px" type="submit" value="Logout" class="btn btn-danger my-2" ></input>
+                </form>
              
           </li>
         </ul>
