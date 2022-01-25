@@ -139,7 +139,6 @@
   <div class="card-body">
     <h5 class="card-title"><%=rs1.getString("name")%></h5>
     <p class="card-text"><%=rs1.getString("bookingDiscription")%></p>
-    <a type="button" class="btn btn-primary">Details</a>
     <a href="bookingappointment?id=<%=rs1.getString("idbookingappointment")%>&type=Remove" type="button" class="btn btn-danger">Cancel</a>
   </div>
 </div>
