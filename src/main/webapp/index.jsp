@@ -65,7 +65,7 @@
     
         <div class="container">
         <h1 id="WLCM">Welcome!</h1>
-          <p>This is a simple project for our university for class Software Design and Architecture which is created by Zheer, Siros, Lawand and supervised by our teacher Mr. Ako and our lab assitents who are Mr. Zhyar and Mr. Mohemmed. This project is bridge for developers and their client were they can communicate with each other through this website by using the tools that are provided by the website, through this website you can monitor and communicate with the clients in the easiest way prossibel</p>
+          <p>This is a simple project for our university for class Internet Programming which is created by Zheer, Siros, Lawand, Aland and supervised by our teacher Mr. Ako and our lab assitents who are Mr. Zhyar and Mr. Mohemmed. This project is bridge for developers and their client were they can communicate with each other through this website by using the tools that are provided by the website, through this website you can monitor and communicate with the clients in the easiest way possible.</p>
         </div>
       
     <!-- Optional JavaScript; choose one of the two! -->
