@@ -5,11 +5,13 @@
  */
 package Bean;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Zheer
  */
-public class staff {
+public class staff implements Serializable {
     
     
     public staff(){

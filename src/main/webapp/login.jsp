@@ -26,7 +26,16 @@
         
         //redirect user to home page if already logged in
         if(uid!=null){
-            response.sendRedirect("home.jsp");
+            if(uid.getUserRole().equals("admin")){
+                response.sendRedirect("AdminView.jsp");
+            }else if(uid.getUserRole().equals("client")){
+                response.sendRedirect("ClientView.jsp");
+            }
+            else if(uid.getUserRole().equals("staff")){
+            
+                response.sendRedirect("StaffView.jsp");
+            }
+            //response.sendRedirect("home.jsp");
         }
  
         

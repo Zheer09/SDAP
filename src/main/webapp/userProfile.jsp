@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="Bean.Profile"%>
+<%@page import="Bean.staff"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Statement"%>
@@ -13,15 +14,26 @@
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<% Profile pr =(Profile)session.getAttribute("profile");%>
+<% Profile pr =(Profile)session.getAttribute("profile");
+staff st = (staff)session.getAttribute("staff");
+%>
 
           <%
              Connection con = DBconnection.createConnection();
              Statement stm = con.createStatement();
+             ResultSet rs = null;
              
              if(pr.getUserRole().equals("client")){
-             String query = "select * from staff where  ";
-             ResultSet rs = stm.executeQuery(query); 
+             String query = "select * from useraccount where userRole = 'client' and username  = '"+pr.getUsername()+"'  ";
+             rs = stm.executeQuery(query); 
+             }else if(pr.getUserRole().equals("admin")){
+                 String query = "select * from useraccount where userRole = 'admin' and username  = '"+pr.getUsername()+"'  ";
+             rs = stm.executeQuery(query); 
+             }else if(pr.getUserRole().equals("staff")){
+                 String query = "select * from staff where username  = '"+ st.getUsername()+"'  ";
+             rs = stm.executeQuery(query); 
+             }else{
+                 response.sendRedirect("index.jsp");
              }
              
              
@@ -36,7 +48,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Profile</title>
   </head>
   <header>
   <nav class="navbar navbar-light bg-light fixed-top">
@@ -53,7 +65,7 @@
       <div  class="offcanvas-body">
         <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li  class="nav-item">
-              <a  style="width: 150px" href="ClientView.jsp" class="btn btn-primary my-2">Home</a> <br>
+              <a  style="width: 150px" href="index.jsp" class="btn btn-primary my-2">Home</a> <br>
             <a style="width: 150px" href="DisplaySetting.jsp" class="btn btn-primary my-2">Setting</a>
              
           </li>
@@ -66,13 +78,17 @@
     <div class="container">
     <div class="main-body">
  <div class="row gutters-sm">
-           
+     <%
+         while(rs.next() )
+            {  
+                
+       %> 
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                     <div class="mt-3">
-                      <h4>Zh3er Xweri</h4>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
+                        <h4><%= rs.getString("fullName")  %></h4>
+                      <p class="text-secondary mb-1"><%= rs.getString("userRole")  %></p>
                       <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                     </div>
                   </div> 
@@ -86,7 +102,7 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Kenneth Valdez
+                      <%= rs.getString("fullName")  %>
                     </div>
                   </div>
                   <hr>
@@ -95,7 +111,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      fip@jukmuh.al
+                      <%= rs.getString("userEmail")  %>
                     </div>
                   </div>
                   <hr>
@@ -113,7 +129,7 @@
                       <h6 class="mb-0">Salary</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      0.9$
+                      4300$
                     </div>
                   </div>
                   <hr>
@@ -139,7 +155,9 @@
 
         </div>
     </div>
-
+    <%
+        }
+        %>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -20,7 +20,7 @@
             }
             else if(uid.getUserRole().equals("staff")){
             
-                response.sendRedirect("ClientView.jsp");
+                response.sendRedirect("StaffView.jsp");
             }
             //response.sendRedirect("home.jsp");
         }

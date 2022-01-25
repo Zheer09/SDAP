@@ -13,6 +13,24 @@
 <%@page import="java.sql.PreparedStatement" %>
 
 <% Profile pr =(Profile)session.getAttribute("profile");%>
+<%
+        Profile uid=(Profile)session.getAttribute("user");
+
+        //redirect user to home page if already logged in
+        if(uid!=null){
+
+            if(uid.getUserRole().equals("admin")){
+                response.sendRedirect("AdminView.jsp");
+            }
+            else if(uid.getUserRole().equals("staff")){
+            
+                response.sendRedirect("StaffView.jsp");
+            }
+            //response.sendRedirect("home.jsp");
+        }
+ 
+
+        %>
  
 <% String name = pr.getFullName();
    String email = pr.getUserEmail();

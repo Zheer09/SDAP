@@ -11,6 +11,24 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+        Profile uid=(Profile)session.getAttribute("user");
+
+        //redirect user to home page if already logged in
+        if(uid!=null){
+
+            if(uid.getUserRole().equals("client")){
+                response.sendRedirect("ClientView.jsp");
+            }
+            else if(uid.getUserRole().equals("staff")){
+            
+                response.sendRedirect("StaffView.jsp");
+            }
+            
+        }
+ 
+
+        %>
 
  <% Profile pr =(Profile)session.getAttribute("profile");
  

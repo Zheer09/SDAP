@@ -16,6 +16,23 @@
 
 
 <% staff pr =(staff)session.getAttribute("staff");%>
+<%
+        Profile uid=(Profile)session.getAttribute("user");
+
+        //redirect user to home page if already logged in
+        if(uid!=null){
+
+            if(uid.getUserRole().equals("admin")){
+                response.sendRedirect("AdminView.jsp");
+            }else if(uid.getUserRole().equals("client")){
+                response.sendRedirect("ClientView.jsp");
+            }
+            
+          
+        }
+ 
+
+        %>
  
 <% String name = pr.getUsername();
 %>
