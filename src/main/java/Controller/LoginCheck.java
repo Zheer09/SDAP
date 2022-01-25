@@ -111,6 +111,7 @@ public class LoginCheck extends HttpServlet {
                      user.setUsername(rs.getString("StaffUsername"));
                      user.setStaffEmail(rs.getString("StaffEmail"));
                      
+                     
                      HttpSession session=request.getSession(); 
                      session.setAttribute("staff", user);
                      

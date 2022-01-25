@@ -4,11 +4,13 @@
     Author     : Zheer
 --%>
 
+<%@page import="Bean.staff"%>
 <%@page import="Bean.Profile"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
 
 <%
         Profile uid=(Profile)session.getAttribute("profile");
+        staff stt = (staff)session.getAttribute("staff");
 
         //redirect user to home page if already logged in
         if(uid!=null){
@@ -18,12 +20,13 @@
             }else if(uid.getUserRole().equals("client")){
                 response.sendRedirect("ClientView.jsp");
             }
-            else if(uid.getUserRole().equals("staff")){
+        }
+             if(null != session.getAttribute("staff")){
             
                 response.sendRedirect("StaffView.jsp");
             }
             //response.sendRedirect("home.jsp");
-        }
+        
  
 
         %>

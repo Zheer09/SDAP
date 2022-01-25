@@ -23,14 +23,18 @@ staff st = (staff)session.getAttribute("staff");
              Statement stm = con.createStatement();
              ResultSet rs = null;
              
+             if(pr!=null){
              if(pr.getUserRole().equals("client")){
              String query = "select * from useraccount where userRole = 'client' and username  = '"+pr.getUsername()+"'  ";
              rs = stm.executeQuery(query); 
              }else if(pr.getUserRole().equals("admin")){
                  String query = "select * from useraccount where userRole = 'admin' and username  = '"+pr.getUsername()+"'  ";
              rs = stm.executeQuery(query); 
-             }else if(pr.getUserRole().equals("staff")){
-                 String query = "select * from staff where username  = '"+ st.getUsername()+"'  ";
+             } 
+             }
+             else if(st!=null){
+             
+             String query = "select * from staff where StaffUsername  = '"+ st.getUsername()+"'  ";
              rs = stm.executeQuery(query); 
              }else{
                  response.sendRedirect("index.jsp");
@@ -93,12 +97,12 @@ staff st = (staff)session.getAttribute("staff");
                   <div class="d-flex flex-column align-items-center text-center">
                     <div class="mt-3">
                         <h4><% String fn = "";
-                            if(!pr.getUserRole().equals("staff")){
+                            if(st==null){
                             fn = rs.getString("fullName"); }
                         else {
                             fn = rs.getString("First_Name") + " " + rs.getString("Last_Name");
                         } %> <%= fn %></h4>
-                      <p class="text-secondary mb-1"><%= rs.getString("userRole")  %></p>
+                      <%if (st == null){ %> <p class="text-secondary mb-1"><%= rs.getString("userRole")  %></p> <% } %>
                       <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                     </div>
                   </div> 
@@ -122,7 +126,7 @@ staff st = (staff)session.getAttribute("staff");
                     </div>
                     <div class="col-sm-9 text-secondary">
                         <% String em = "";
-                            if(!pr.getUserRole().equals("staff")){
+                            if(st==null){
                             em = rs.getString("userEmail"); }
                         else {
                             em = rs.getString("StaffEmail");
@@ -140,6 +144,7 @@ staff st = (staff)session.getAttribute("staff");
                     </div>
                   </div>
                   <hr>
+                  <% if(st != null){%>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Salary</h6>
@@ -148,6 +153,7 @@ staff st = (staff)session.getAttribute("staff");
                       4300$
                     </div>
                   </div>
+                  <% }%>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">

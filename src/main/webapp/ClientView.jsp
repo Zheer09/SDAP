@@ -4,6 +4,7 @@
     Author     : Zheer
 --%>
 
+<%@page import="Bean.staff"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
@@ -15,6 +16,7 @@
 <% Profile pr =(Profile)session.getAttribute("profile");%>
 <%
         Profile uid=(Profile)session.getAttribute("profile");
+        staff st = (staff)session.getAttribute("staff");
 
         //redirect user to home page if already logged in
         if(uid!=null){
@@ -22,25 +24,30 @@
             if(uid.getUserRole().equals("admin")){
                 response.sendRedirect("AdminView.jsp");
             }
-            else if(uid.getUserRole().equals("staff")){
             
-                response.sendRedirect("StaffView.jsp");
-            }
             //response.sendRedirect("home.jsp");
+        }else if (st!=null){
+            response.sendRedirect("StaffView.jsp");
         }
  
 
         %>
  
-<% String name = pr.getFullName();
-   String email = pr.getUserEmail();
-%>
+
 
           <%
-             Connection con = DBconnection.createConnection();
-             Statement stm = con.createStatement();
+              ResultSet rs = null;
+              Connection con = DBconnection.createConnection();
+              Statement stm = con.createStatement();
+              if(uid!=null){
+              String name = pr.getFullName();
+                String email = pr.getUserEmail();
+             
+             
              String query = "select * from projects where username='"+pr.getUsername()+"' ";
-             ResultSet rs = stm.executeQuery(query); %>
+             rs = stm.executeQuery(query); 
+              }
+          %>
 
              
 <!doctype html>
@@ -96,6 +103,7 @@
    <br>
    
              <%   
+                
             while(rs.next())
             {
           %>
@@ -110,17 +118,17 @@
   </div>
   
 </div>
-   <%   } %>
+   <%   }  %>
 </div>  
         
           
           
 </div> 
          
-  <%  
+  <%   
              String query1 = "select * from bookingappointment where username='"+pr.getUsername()+"'";
              ResultSet rs1 = stm.executeQuery(query1);
-             
+  
              %>
 </section>
       <section>
@@ -128,7 +136,7 @@
           <h1>Appointments</h1><hr>
 <br>
 
-<%   
+<%      
             while(rs1.next())
             {
           %>
@@ -144,7 +152,7 @@
 </div>
           
      <%   
-         }
+         } 
           %>     
 </div> 
 </section>
