@@ -120,10 +120,15 @@ public class staffcontroller extends HttpServlet {
         PreparedStatement pres;
         
         String typebtn = request.getParameter("typebtn");
+        String typebtnClient = request.getParameter("typebtnClient");
         
          int id=Integer.parseInt(request.getParameter("id")); 
+         
+         String user = request.getParameter("username");
+         
+         if(typebtn.equals("Delete")){  
              
-         if(typebtn.equals("Delete")){    
+           if(typebtnClient == null){
           try {
             con = DBconnection.createConnection();
             String query = "DELETE FROM staff WHERE staffid=?";
@@ -145,6 +150,31 @@ public class staffcontroller extends HttpServlet {
              {
                 e.printStackTrace();
              }
+           }
+           
+           if(typebtnClient != null){
+          try {
+            con = DBconnection.createConnection();
+            String query = "DELETE FROM useraccount WHERE username=?";
+            pres = con.prepareStatement(query);
+            pres.setString(1, user);
+
+            int i =  pres.executeUpdate();
+
+                if (i!=0){
+
+                id = 0;
+                request.setAttribute("deleted", "The account has been deleted");  
+                RequestDispatcher dis = request.getRequestDispatcher("employeeList.jsp");
+                dis.forward(request, response);
+                }
+
+            } 
+              catch(SQLException e)
+             {
+                e.printStackTrace();
+             }
+           }
 
             }
     }

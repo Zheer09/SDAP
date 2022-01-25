@@ -130,6 +130,58 @@
   
 </div>
       </section>
+  
+  <br><br><br>
+       <section>
+      <div class="container">
+          <h1>Client List</h1><hr>
+   
+     <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">fullName</th>
+      <th scope="col">Email</th>     
+       <th scope="col">#</th>
+    </tr>
+  </thead>
+  
+  <% 
+      String query1 = "select * from useraccount where userRole='client'";
+             ResultSet rs1 = stm.executeQuery(query1); %>
+  <tbody>
+    <%   
+            while(rs1.next())
+            {
+          %>   
+    <tr>
+      <th scope="row"><%=rs1.getString("username")%></th>
+      <td><%=rs1.getString("fullName")%></td>
+      <td><%=rs1.getString("userEmail")%></td>
+      <td>
+          <a href="staffcontroller?username=<%=rs1.getString("username")%>&typebtnClient=Info" value="Info" type="submit" class="btn btn-primary">Info</a>
+          <a href="staffcontroller?username=<%=rs1.getString("username")%>&typebtnClient=Delete" value="Delete" type="submit" class="btn btn-danger">Delete</a>
+      
+      </td>
+      
+    </tr>
+    
+    <%   
+        }
+          %> 
+  </tbody>
+</table>
+  
+  <c:if test="${not empty deleted}">
+       <div class="alert alert-dismissable alert-success"> 
+            <strong>${deleted}</strong>
+             </div>
+           </c:if>
+  
+      </div>
+  
+</div>
+      </section>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
